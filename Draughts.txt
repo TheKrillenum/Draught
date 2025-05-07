@@ -1,0 +1,22 @@
+Draughts
+
+Needed:
+
+A board (50 tiles)
+Men (20 pieces per side, black and white)
+An AI (TBD)
+The player
+TBD maybe a GameManager
+
+Rules:
+Pieces MUST take other pieces if they may. 
+Multiple pieces can be taken at once by the same piece, if there are multiple option it will always choose the longest option.
+king can move as much as they want forward and backward, including when capturing.
+
+
+- 25 consecutive king moves without capturing got a king/ game drawn
+- one player has 1 king, an the other one has 3 pieces, game drawn after 16 move
+- reduced to 5 moves if the other player has less then 3 pieces (only for king).
+- same layout with same side need to move = drawn.
+
+- a player lose when he has no move available OR no piece available
