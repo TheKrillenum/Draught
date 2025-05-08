@@ -14,7 +14,7 @@ Multiple pieces can be taken at once by the same piece, if there are multiple op
 king can move as much as they want forward and backward, including when capturing.
 
 
-- 25 consecutive king moves without capturing got a king/ game drawn
+- 25 consecutive king moves without capturing with a king/ game drawn
 - one player has 1 king, an the other one has 3 pieces, game drawn after 16 move
 - reduced to 5 moves if the other player has less then 3 pieces (only for king).
 - same layout with same side need to move = drawn.
