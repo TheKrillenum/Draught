@@ -20,3 +20,19 @@ king can move as much as they want forward and backward, including when capturin
 - same layout with same side need to move = drawn.
 
 - a player lose when he has no move available OR no piece available
+
+
+exam:
+- Diagram and code need to match, if not: SHOW IT / WARN / MAKE UPDATED DIAGRAMS
+- Use ChatGPT is allowed, but you need to be able to explain
+- NO bullshitting
+- Don't comment code, neutral 100%, no opinion, robot-man talking
+- 
+
+
+
+
+
+-                      Residence certificate
+
+-                      School certificate
