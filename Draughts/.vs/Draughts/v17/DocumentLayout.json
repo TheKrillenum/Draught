@@ -1,0 +1,156 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Board.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\Board.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\GameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\GameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Men.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\Men.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\DynamicArray.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\DynamicArray.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Draughts.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\Draughts.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\TileStruct.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\TileStruct.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\PositionStruct.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\PositionStruct.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Board.h",
+              "DocumentMoniker": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Board.h",
+              "RelativeDocumentMoniker": "Draughts\\Board.h",
+              "ToolTip": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Board.h",
+              "RelativeToolTip": "Draughts\\Board.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-17T21:12:31.811Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GameManager.h",
+              "DocumentMoniker": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\GameManager.h",
+              "RelativeDocumentMoniker": "Draughts\\GameManager.h",
+              "ToolTip": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\GameManager.h",
+              "RelativeToolTip": "Draughts\\GameManager.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-17T20:58:46.486Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Player.h",
+              "DocumentMoniker": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Player.h",
+              "RelativeDocumentMoniker": "Draughts\\Player.h",
+              "ToolTip": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Player.h",
+              "RelativeToolTip": "Draughts\\Player.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-17T21:08:52.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Men.h",
+              "DocumentMoniker": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Men.h",
+              "RelativeDocumentMoniker": "Draughts\\Men.h",
+              "ToolTip": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Men.h",
+              "RelativeToolTip": "Draughts\\Men.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-17T20:59:15.623Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DynamicArray.h",
+              "DocumentMoniker": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\DynamicArray.h",
+              "RelativeDocumentMoniker": "Draughts\\DynamicArray.h",
+              "ToolTip": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\DynamicArray.h",
+              "RelativeToolTip": "Draughts\\DynamicArray.h",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-17T12:21:08.815Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TileStruct.h",
+              "DocumentMoniker": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\TileStruct.h",
+              "RelativeDocumentMoniker": "Draughts\\TileStruct.h",
+              "ToolTip": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\TileStruct.h",
+              "RelativeToolTip": "Draughts\\TileStruct.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-17T11:02:47.314Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PositionStruct.h",
+              "DocumentMoniker": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\PositionStruct.h",
+              "RelativeDocumentMoniker": "Draughts\\PositionStruct.h",
+              "ToolTip": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\PositionStruct.h",
+              "RelativeToolTip": "Draughts\\PositionStruct.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-17T11:02:34.587Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Draughts.cpp",
+              "DocumentMoniker": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Draughts.cpp",
+              "RelativeDocumentMoniker": "Draughts\\Draughts.cpp",
+              "ToolTip": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Draughts.cpp",
+              "RelativeToolTip": "Draughts\\Draughts.cpp",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAwwB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-17T10:51:17.908Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
