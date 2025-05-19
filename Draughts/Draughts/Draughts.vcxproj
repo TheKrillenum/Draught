@@ -130,6 +130,8 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Draughts.cpp" />
     <ClCompile Include="DynamicArray.cpp" />
+    <ClCompile Include="EatingList.cpp" />
+    <ClCompile Include="EatingNode.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Men.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -137,6 +139,8 @@
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="DynamicArray.h" />
+    <ClInclude Include="EatingList.h" />
+    <ClInclude Include="EatingNode.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Men.h" />
     <ClInclude Include="Player.h" />

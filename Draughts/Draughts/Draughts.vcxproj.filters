@@ -33,6 +33,12 @@
     <ClCompile Include="DynamicArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EatingList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EatingNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -54,6 +60,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DynamicArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EatingList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EatingNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
