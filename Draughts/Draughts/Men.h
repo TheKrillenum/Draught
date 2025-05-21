@@ -14,6 +14,7 @@ private:
 
 public:
 
+	Men(bool white, PositionStruct initPosition);
 	PositionStruct* CanEat();
 	PositionStruct* CanMove();
 	PositionStruct* LongestEatingRoute(PositionStruct currentPosition);

@@ -1,4 +1,8 @@
 #pragma once
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 template <typename T>
 class DynamicArray
@@ -19,7 +23,8 @@ public:
 	int GetCapacity();
 	void Add(T& newData);
 	void Shrink();
-	
+	T* GetData(int index);
+	void DisplayList();
 };
 
 template<typename T>
@@ -87,4 +92,25 @@ inline void DynamicArray<T>::Shrink()
 		capacity = currentSize;
 		data = tempArray;
 	}
+}
+
+template<typename T>
+T* DynamicArray<T>::GetData(int index)
+{
+	return data[index];
+}
+
+template <typename T>
+void DynamicArray<T>::DisplayList()
+{
+	cout << "Generic DisplayList():\n";
+}
+
+template<>
+inline void DynamicArray<string>::DisplayList()
+{
+	for (int i = 0; i < currentSize; i++) {
+		cout << "- " << data[i] << endl;
+	}
+	cout << endl;
 }

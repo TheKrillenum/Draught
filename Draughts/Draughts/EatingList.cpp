@@ -1,15 +1,13 @@
+#include <iostream>
 #include "EatingList.h"
 
-EatingList::EatingList(EatingNode* firstNode = nullptr)
+
+using namespace std;
+
+EatingList::EatingList()
 {
-	head = firstNode;
-	
-	if (head != nullptr) {
-		lenght = 1;
-	}
-	else {
-		lenght = 0;
-	}
+	head = nullptr;
+	lenght = 0;
 }
 
 EatingList::~EatingList()
@@ -17,22 +15,54 @@ EatingList::~EatingList()
 	delete head;
 }
 
-void EatingList::PushNode(EatingNode* newNode)
+void EatingList::PushNode(PositionStruct* newNode)
 {
-	newNode->SetNext(head);
-	head = newNode;
+	EatingNode* temp = new EatingNode(newNode);
+	temp->SetNext(head);
+	head = temp;
+
 	lenght++;
 }
 
 void EatingList::PopNode()
 {
+	if (head == nullptr) {
+		return;
+	}
+
 	EatingNode* temp = head->GetNext();
 	delete head;
 	head = temp;
 	lenght--;
 }
 
-EatingNode* EatingList::GetNode()
+PositionStruct* EatingList::GetData()
 {
-	return head;
+	if (head != nullptr) {
+		return head->GetData();
+	}
+	else {
+		PositionStruct* temp = new PositionStruct{ -1 , -1 };
+		return temp;
+	}
+}
+
+int EatingList::GetLenght()
+{
+	return lenght;
+}
+
+void EatingList::DisplayList()
+{
+	cout << "Displaying list of lenght " << lenght << endl;
+
+	EatingNode* temp = head;
+
+	while (temp != nullptr) {
+		cout << "-> row:" << temp->GetData()->row << " column:" << temp->GetData()->column << endl;
+		temp = temp->GetNext();
+	}
+
+	cout << "----------------------------";
+	cout << endl << endl;
 }

@@ -129,7 +129,6 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Draughts.cpp" />
-    <ClCompile Include="DynamicArray.cpp" />
     <ClCompile Include="EatingList.cpp" />
     <ClCompile Include="EatingNode.cpp" />
     <ClCompile Include="GameManager.cpp" />

@@ -1,6 +1,6 @@
 #include "EatingNode.h"
 
-EatingNode::EatingNode(PositionStruct newData)
+EatingNode::EatingNode(PositionStruct* newData)
 {
 	next = nullptr;
 	data = newData;
@@ -16,12 +16,12 @@ void EatingNode::SetNext(EatingNode* newNext)
 	next = newNext;
 }
 
-PositionStruct EatingNode::GetData()
+PositionStruct* EatingNode::GetData()
 {
 	return data;
 }
 
-void EatingNode::SetData(PositionStruct newData)
+void EatingNode::SetData(PositionStruct* newData)
 {
 	data = newData;
 }

@@ -7,10 +7,11 @@ class GameManager
 private:
 
 	Player* currentPlayer;
-	Player* allPlayers;
+	Player* allPlayers[2];
 
 public: 
 
+	GameManager();
 	void PlayGame();
 	void PlayTurn();
 	PositionStruct PlayerReturnChosenMen(PositionStruct* menToChoose);
@@ -22,6 +23,8 @@ public:
 	void SwitchCurrentPlayer();
 	void DrawGame();
 	void EndGame(Player winner);
+
+	void GetCurrentPlayer();
 
 };
 

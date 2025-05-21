@@ -1,4 +1,5 @@
 #pragma once
+#include "PositionStruct.h"
 #include "EatingNode.h"
 
 class EatingList
@@ -10,11 +11,13 @@ private:
 
 public:
 
-	EatingList(EatingNode* firstNode);
+	EatingList();
 	~EatingList();
-	void PushNode(EatingNode* newNode);
+	void PushNode(PositionStruct* newNode);
 	void PopNode();
-	EatingNode* GetNode();
+	PositionStruct* GetData();
+	int GetLenght();
+	void DisplayList();
 
 };
 
