@@ -15,6 +15,14 @@
       "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\Draughts.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Men.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\Men.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Men.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\Men.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\DynamicArray.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\DynamicArray.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
@@ -26,20 +34,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "Men.cpp",
+              "DocumentMoniker": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Men.cpp",
+              "RelativeDocumentMoniker": "Draughts\\Men.cpp",
+              "ToolTip": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Men.cpp",
+              "RelativeToolTip": "Draughts\\Men.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-25T00:54:47.817Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Men.h",
+              "DocumentMoniker": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Men.h",
+              "RelativeDocumentMoniker": "Draughts\\Men.h",
+              "ToolTip": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Men.h",
+              "RelativeToolTip": "Draughts\\Men.h",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-25T00:54:14.017Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "DynamicArray.h",
               "DocumentMoniker": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\DynamicArray.h",
               "RelativeDocumentMoniker": "Draughts\\DynamicArray.h",
               "ToolTip": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\DynamicArray.h",
               "RelativeToolTip": "Draughts\\DynamicArray.h",
-              "ViewState": "AgIAAGQAAAAAAAAAAAAAAHMAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAHMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-21T19:50:18.336Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T19:50:18.336Z"
             },
             {
               "$type": "Document",
@@ -49,7 +82,7 @@
               "RelativeDocumentMoniker": "Draughts\\Board.cpp",
               "ToolTip": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Board.cpp",
               "RelativeToolTip": "Draughts\\Board.cpp",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAADgAAAAAAAAAAAAAAEAAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-05-20T15:15:49.042Z",
               "EditorCaption": ""
@@ -62,7 +95,7 @@
               "RelativeDocumentMoniker": "Draughts\\Board.h",
               "ToolTip": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Board.h",
               "RelativeToolTip": "Draughts\\Board.h",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAABkAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-05-21T15:03:29.514Z",
               "EditorCaption": ""
@@ -75,7 +108,7 @@
               "RelativeDocumentMoniker": "Draughts\\Draughts.cpp",
               "ToolTip": "C:\\Users\\Krillenum (Mat)\\Desktop\\Work Asset\\BTS_Modules\\Object oriented programming\\OOPRO4\\DraughtExam\\Draught\\Draughts\\Draughts\\Draughts.cpp",
               "RelativeToolTip": "Draughts\\Draughts.cpp",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-05-17T10:51:17.908Z",
               "EditorCaption": ""

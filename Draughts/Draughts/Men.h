@@ -1,6 +1,9 @@
 #pragma once
 #include "PositionStruct.h"
 #include "DynamicArray.h"
+#include <vector>
+
+using namespace std;
 
 class Men
 {
@@ -15,9 +18,11 @@ private:
 public:
 
 	Men(bool white, PositionStruct initPosition);
-	PositionStruct* CanEat();
-	PositionStruct* CanMove();
-	PositionStruct* LongestEatingRoute(PositionStruct currentPosition);
-
+	bool GetWhite();
+	bool GetKing();
+	void TransformToKing();
+	vector<PositionStruct>* CanEat();
+	vector<PositionStruct>* CanMove();
+	vector<PositionStruct>* LongestEatingRoute(PositionStruct currentPosition);
 };
 

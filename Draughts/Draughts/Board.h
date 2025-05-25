@@ -21,16 +21,14 @@ public:
 
 	Board(const Board&) = delete;
 	Board& operator=(const Board&) = delete;
-	/*
+	static Board* GetBoardSingleton();
+
+	void LoadBoard(string FEN);
 	Men* MoveMen(PositionStruct men, PositionStruct destination);
 	void CheckMenBecomeKing(PositionStruct men);
 	string UpdateFEN(string playerTurn);
 	string GetMenLayout();
 	string GetAndUpdateAmountOfTurn();
-	*/
-	void Hello();
-
-	static Board* GetBoardSingleton();
-
+	void DisplayBoard();
 };
 
