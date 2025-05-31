@@ -24,7 +24,7 @@ public:
 	static Board* GetBoardSingleton();
 
 	void LoadBoard(string FEN);
-	Men* MoveMen(PositionStruct men, PositionStruct destination);
+	void MoveMen(PositionStruct men, PositionStruct destination);
 	void CheckMenBecomeKing(PositionStruct men);
 	string UpdateFEN(string playerTurn);
 	string GetMenLayout();

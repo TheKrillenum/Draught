@@ -14,8 +14,8 @@ int main()
     cout << "Test initiated";
     cout << endl;
 
-    Board::GetBoardSingleton()->DisplayBoard();
-    Board::GetBoardSingleton();
+    /*oard::GetBoardSingleton()->DisplayBoard();
+    Board::GetBoardSingleton();*/
 
     return 0;
 }

@@ -60,9 +60,24 @@ void Board::LoadBoard(string FEN)
 	// provided FEN.
 }
 
-Men* Board::MoveMen(PositionStruct men, PositionStruct destination)
+void Board::MoveMen(PositionStruct men, PositionStruct destination)
 {
-	return nullptr;
+	PositionStruct positionToCheck = men;
+	int rowToCheck = (men.row - destination.row < 0) ? 1 : -1;
+	int columnToCheck = (men.column - destination.column < 0) ? 1 : -1;
+
+	while (!(positionToCheck == destination)) {
+		positionToCheck.row += rowToCheck;
+		positionToCheck.column += columnToCheck;
+
+		if (gameBoard[positionToCheck.row][positionToCheck.column]->men != nullptr &&
+			) {
+
+		}
+	}
+	
+	gameBoard[destination.row][destination.column]->men = gameBoard[men.row][men.column]->men;
+	gameBoard[men.row][men.column]->men = nullptr;
 }
 
 void Board::CheckMenBecomeKing(PositionStruct men)
