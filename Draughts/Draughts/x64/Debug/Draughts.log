@@ -1,2 +1,7 @@
-﻿  Draughts.cpp
+﻿  Board.cpp
+C:\Users\mateo\OneDrive\Desktop\Mateo\Draught\Draughts\Draughts\Board.cpp(67,8): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\Users\mateo\OneDrive\Desktop\Mateo\Draught\Draughts\Draughts\Board.cpp(67,37): warning C4804: '<': unsafe use of type 'bool' in operation
+  Draughts.cpp
+  GameManager.cpp
+  Generating Code...
   Draughts.vcxproj -> C:\Users\mateo\OneDrive\Desktop\Mateo\Draught\Draughts\x64\Debug\Draughts.exe

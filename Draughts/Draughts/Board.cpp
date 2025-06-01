@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include "Board.h"
 
 Board* Board::singleton = nullptr;
@@ -7,7 +8,7 @@ Board::Board()
 {
 	// Initialise counter values
 	kingMovesCounter = 0;
-	turnCounter = 0;
+	turnCounter = 1;
 
 	// loop through all 50 tiles of the board to initialise them. usableTile start
 	// false since the first tile is unusable, and every other tile is also
@@ -54,6 +55,22 @@ Board* Board::GetBoardSingleton()
 	return singleton;
 }
 
+void Board::Test()
+{
+	gameBoard[0][1]->men = new Men(true, PositionStruct{ 0 , 1 });
+	gameBoard[0][3]->men = new Men(true, PositionStruct{ 0 , 1 });
+	gameBoard[2][3]->men = new Men(false, PositionStruct{ 2 , 3 });
+}
+
+TileStruct* Board::GetTile(PositionStruct position)
+{
+	if (0 <= position.column < 10 && 0 <= position.row < 10) {
+		return gameBoard[position.row][position.column];
+	}
+
+	return nullptr;
+}
+
 void Board::LoadBoard(string FEN)
 {
 	// Load the layout of the Men on the board based on the
@@ -62,20 +79,28 @@ void Board::LoadBoard(string FEN)
 
 void Board::MoveMen(PositionStruct men, PositionStruct destination)
 {
-	PositionStruct positionToCheck = men;
-	int rowToCheck = (men.row - destination.row < 0) ? 1 : -1;
-	int columnToCheck = (men.column - destination.column < 0) ? 1 : -1;
+	//Check the direction in which to check via rowIncrement and columnIncrement, and save the current position to check
+	int rowIncrement = (men.row - destination.row < 0) ? 1 : -1;
+	int columnIncrement = (men.column - destination.column < 0) ? 1 : -1;
+	PositionStruct positionToCheck = PositionStruct{ men.row + rowIncrement, men.column + columnIncrement };
 
+	// while we haven't reach the destination, loop through each tile between the selected men and the destination
 	while (!(positionToCheck == destination)) {
-		positionToCheck.row += rowToCheck;
-		positionToCheck.column += columnToCheck;
 
-		if (gameBoard[positionToCheck.row][positionToCheck.column]->men != nullptr &&
-			) {
+		// If the tile contain a men, alive and of the opposite color, set his "alive" bool to false
+		if (GetTile(positionToCheck)->men != nullptr &&
+			GetTile(positionToCheck)->men->GetWhite() != GetTile(men)->men->GetWhite() &&
+			GetTile(positionToCheck)->men->GetAlive()) {
 
+			GetTile(positionToCheck)->men->SetAlive(false);
+			break;
 		}
+
+		positionToCheck.row += rowIncrement;
+		positionToCheck.column += columnIncrement;
 	}
 	
+	// Move the men from his current tile to the destination tile
 	gameBoard[destination.row][destination.column]->men = gameBoard[men.row][men.column]->men;
 	gameBoard[men.row][men.column]->men = nullptr;
 }
@@ -101,19 +126,53 @@ void Board::CheckMenBecomeKing(PositionStruct men)
 	}
 }
 
-string Board::UpdateFEN(string playerTurn)
+string Board::UpdateFEN(string playerTurn, bool isCurrentPlayerWhite)
 {
-	return string();
+	return playerTurn + GetMenLayout() + ":H" + to_string(kingMovesCounter) + GetAndUpdateAmountOfTurn(isCurrentPlayerWhite);
 }
 
 string Board::GetMenLayout()
 {
-	return string();
+	string MenLayout;
+	stringstream whiteLayout;
+	stringstream blackLayout;
+	
+	// Loop through each tile to update whiteLayout and blackLayout with the indexes of their Men
+	for (int i = 0; i < 10; i++) {
+		for (int j = 0; j < 10; j++) {
+			if (GetTile(PositionStruct{ i , j })->men != nullptr) {
+				if (GetTile(PositionStruct{ i , j })->men->GetWhite()) {
+					whiteLayout << GetTile(PositionStruct{ i , j })->index << ",";
+				}
+				else {
+					blackLayout << GetTile(PositionStruct{ i , j })->index << ",";
+				}
+			}
+		}
+	}
+	
+	// Convert the stringstream to string to remove the last comma
+	string finalWhiteLayout = whiteLayout.str();
+	finalWhiteLayout.pop_back();
+
+	string finalBlackLayout = blackLayout.str();
+	finalBlackLayout.pop_back();
+
+	// Put everzthing together and return it
+	MenLayout = ":W" + finalWhiteLayout + ":B" + finalBlackLayout;
+
+	return MenLayout;
 }
 
-string Board::GetAndUpdateAmountOfTurn()
+string Board::GetAndUpdateAmountOfTurn(bool isCurrentPlayerWhite)
 {
-	return string();
+	if (!isCurrentPlayerWhite) {
+		turnCounter++;
+	}
+
+	string TurnCounterFEN = ":F" + to_string(turnCounter);
+
+	return TurnCounterFEN;
 }
 
 void Board::DisplayBoard()
@@ -123,7 +182,19 @@ void Board::DisplayBoard()
 		for (int j = 0; j < 10; j++) {
 
 			if (gameBoard[i][j]->index != -1) {
-				cout << gameBoard[i][j]->index << "\t|";
+				//cout << gameBoard[i][j]->index << "\t|";
+				if (GetTile(PositionStruct{ i , j })->men != nullptr && GetTile(PositionStruct{ i , j })->men->GetAlive()) {
+					
+					if (GetTile(PositionStruct{ i , j })->men->GetWhite()) {
+						cout << "w" << "\t|";
+					}
+					else {
+						cout << "b" << "\t|";
+					}
+				}
+				else {
+					cout << " e " << "\t|";
+				}
 			}
 			else {
 				cout << " \t|";

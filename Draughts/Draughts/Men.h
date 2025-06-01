@@ -20,6 +20,8 @@ public:
 	Men(bool white, PositionStruct initPosition);
 	bool GetWhite();
 	bool GetKing();
+	bool GetAlive();
+	void SetAlive(bool isAlive);
 	void TransformToKing();
 	vector<PositionStruct>* CanEat();
 	vector<PositionStruct>* CanMove();

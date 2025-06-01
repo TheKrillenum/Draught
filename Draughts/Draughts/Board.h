@@ -23,12 +23,15 @@ public:
 	Board& operator=(const Board&) = delete;
 	static Board* GetBoardSingleton();
 
+	void Test();
+
+	TileStruct* GetTile(PositionStruct position);
 	void LoadBoard(string FEN);
 	void MoveMen(PositionStruct men, PositionStruct destination);
 	void CheckMenBecomeKing(PositionStruct men);
-	string UpdateFEN(string playerTurn);
+	string UpdateFEN(string playerTurn, bool isCurrentPlayerWhite);
 	string GetMenLayout();
-	string GetAndUpdateAmountOfTurn();
+	string GetAndUpdateAmountOfTurn(bool isCurrentPlayerWhite);
 	void DisplayBoard();
 };
 

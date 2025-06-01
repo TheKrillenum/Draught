@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\Board.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\Board.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\Draughts.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\Draughts.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\PositionStruct.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\PositionStruct.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\Board.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\Board.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\Board.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -27,6 +23,10 @@
       "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\Men.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\PositionStruct.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\PositionStruct.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\DynamicArray.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{4289D7AF-CF53-4D52-A9EC-CB46641F77EA}|Draughts\\Draughts.vcxproj|solutionrelative:Draughts\\DynamicArray.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
@@ -38,11 +38,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "PositionStruct.h",
               "DocumentMoniker": "C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\PositionStruct.h",
               "RelativeDocumentMoniker": "Draughts\\PositionStruct.h",
@@ -50,32 +50,33 @@
               "RelativeToolTip": "Draughts\\PositionStruct.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-31T08:39:59.247Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-31T08:39:59.247Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Men.cpp",
               "DocumentMoniker": "C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\Men.cpp",
               "RelativeDocumentMoniker": "Draughts\\Men.cpp",
               "ToolTip": "C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\Men.cpp",
               "RelativeToolTip": "Draughts\\Men.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAmwBwAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-25T00:54:47.817Z"
+              "WhenOpened": "2025-05-25T00:54:47.817Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "Men.h",
               "DocumentMoniker": "C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\Men.h",
               "RelativeDocumentMoniker": "Draughts\\Men.h",
               "ToolTip": "C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\Men.h",
               "RelativeToolTip": "Draughts\\Men.h",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABUAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-25T00:54:14.017Z"
+              "WhenOpened": "2025-05-25T00:54:14.017Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -91,39 +92,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Board.cpp",
               "DocumentMoniker": "C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\Board.cpp",
               "RelativeDocumentMoniker": "Draughts\\Board.cpp",
               "ToolTip": "C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\Board.cpp",
               "RelativeToolTip": "Draughts\\Board.cpp",
-              "ViewState": "AgIAADsAAAAAAAAAAAAAAEkAAAADAAAAAAAAAA==",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAAAIIAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-05-20T15:15:49.042Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Board.h",
               "DocumentMoniker": "C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\Board.h",
               "RelativeDocumentMoniker": "Draughts\\Board.h",
               "ToolTip": "C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\Board.h",
               "RelativeToolTip": "Draughts\\Board.h",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACAAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-05-21T15:03:29.514Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Draughts.cpp",
               "DocumentMoniker": "C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\Draughts.cpp",
               "RelativeDocumentMoniker": "Draughts\\Draughts.cpp",
               "ToolTip": "C:\\Users\\mateo\\OneDrive\\Desktop\\Mateo\\Draught\\Draughts\\Draughts\\Draughts.cpp",
               "RelativeToolTip": "Draughts\\Draughts.cpp",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAwBEAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAwBMAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-05-17T10:51:17.908Z",
               "EditorCaption": ""

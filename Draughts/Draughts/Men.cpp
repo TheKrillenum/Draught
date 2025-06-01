@@ -19,6 +19,16 @@ bool Men::GetKing()
 	return bKing;
 }
 
+bool Men::GetAlive()
+{
+	return bAlive;
+}
+
+void Men::SetAlive(bool isAlive)
+{
+	bAlive = isAlive;
+}
+
 void Men::TransformToKing()
 {
 	bKing = true;

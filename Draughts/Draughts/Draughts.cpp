@@ -14,8 +14,10 @@ int main()
     cout << "Test initiated";
     cout << endl;
 
-    /*oard::GetBoardSingleton()->DisplayBoard();
-    Board::GetBoardSingleton();*/
+    Board::GetBoardSingleton()->Test();
+    Board::GetBoardSingleton()->DisplayBoard();
+    cout << " --------------------------------------------------------------- " << endl;
+    cout << Board::GetBoardSingleton()->UpdateFEN("W", true);
 
     return 0;
 }
