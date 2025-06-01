@@ -2,6 +2,7 @@
 #include "TileStruct.h"
 #include "DynamicArray.h"
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -13,7 +14,7 @@ private:
 	static Board* singleton;
 
 	TileStruct* gameBoard[10][10];
-	DynamicArray<string> fenHistory;
+	vector<string> fenHistory;
 	int turnCounter;
 	int kingMovesCounter;
 
@@ -23,15 +24,14 @@ public:
 	Board& operator=(const Board&) = delete;
 	static Board* GetBoardSingleton();
 
-	void Test();
-
 	TileStruct* GetTile(PositionStruct position);
-	void LoadBoard(string FEN);
+	string LoadBoard(string FEN);
+	void setupMen(string MenLayout, bool bWhite);
 	void MoveMen(PositionStruct men, PositionStruct destination);
 	void CheckMenBecomeKing(PositionStruct men);
-	string UpdateFEN(string playerTurn, bool isCurrentPlayerWhite);
+	void UpdateFEN(string playerTurn);
 	string GetMenLayout();
-	string GetAndUpdateAmountOfTurn(bool isCurrentPlayerWhite);
+	string GetAndUpdateAmountOfTurn(bool blackPlayerTurn);
 	void DisplayBoard();
 };
 

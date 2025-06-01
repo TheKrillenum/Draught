@@ -1,5 +1,4 @@
 #include <iostream>
-#include <sstream>
 #include "Board.h"
 
 Board* Board::singleton = nullptr;
@@ -55,26 +54,69 @@ Board* Board::GetBoardSingleton()
 	return singleton;
 }
 
-void Board::Test()
-{
-	gameBoard[0][1]->men = new Men(true, PositionStruct{ 0 , 1 });
-	gameBoard[0][3]->men = new Men(true, PositionStruct{ 0 , 1 });
-	gameBoard[2][3]->men = new Men(false, PositionStruct{ 2 , 3 });
-}
-
 TileStruct* Board::GetTile(PositionStruct position)
 {
-	if (0 <= position.column < 10 && 0 <= position.row < 10) {
-		return gameBoard[position.row][position.column];
-	}
-
-	return nullptr;
+	return gameBoard[position.row][position.column];
 }
 
-void Board::LoadBoard(string FEN)
+string Board::LoadBoard(string FEN)
 {
-	// Load the layout of the Men on the board based on the
-	// provided FEN.
+	stringstream SSFEN;
+	SSFEN << FEN;
+
+	string newCurrentPlayer, whiteMen, blackMen, kingMove, fullMove;
+
+	getline(SSFEN, newCurrentPlayer, ':');
+	getline(SSFEN, whiteMen, ':');
+	getline(SSFEN, blackMen, ':');
+	getline(SSFEN, kingMove, ':');
+	getline(SSFEN, fullMove, ':');
+
+	kingMove.erase(0, 1);
+	kingMovesCounter = stoi(kingMove);
+
+	fullMove.erase(0, 1);
+	turnCounter = stoi(fullMove);
+
+	whiteMen.erase(0, 1);
+	setupMen(whiteMen, true);
+
+	blackMen.erase(0, 1);
+	setupMen(blackMen, false);
+
+	return newCurrentPlayer;
+}
+
+void Board::setupMen(string MenLayout, bool bWhite)
+{
+	stringstream allMenIndexes;
+	allMenIndexes << MenLayout;
+	
+	string smenIndex;
+	int menIndex;
+
+	if (getline(allMenIndexes, smenIndex, ',')) {
+		menIndex = stoi(smenIndex);
+	}
+	else {
+		return;
+	}
+
+	for (int i = 0; i < 10; i++) {
+		for (int j = 0; j < 10; j++) {
+			if (GetTile(PositionStruct{ i, j })->index == menIndex) {
+				
+				GetTile(PositionStruct{ i, j })->men = new Men(bWhite, PositionStruct{ i, j });
+				
+				if (getline(allMenIndexes, smenIndex, ',')) {
+					menIndex = stoi(smenIndex);
+				}
+				else {
+					return;
+				}
+			}
+		}
+	}
 }
 
 void Board::MoveMen(PositionStruct men, PositionStruct destination)
@@ -126,9 +168,9 @@ void Board::CheckMenBecomeKing(PositionStruct men)
 	}
 }
 
-string Board::UpdateFEN(string playerTurn, bool isCurrentPlayerWhite)
+void Board::UpdateFEN(string playerTurn)
 {
-	return playerTurn + GetMenLayout() + ":H" + to_string(kingMovesCounter) + GetAndUpdateAmountOfTurn(isCurrentPlayerWhite);
+	fenHistory.push_back(playerTurn + GetMenLayout() + ":H" + to_string(kingMovesCounter) + GetAndUpdateAmountOfTurn(playerTurn == "B"));
 }
 
 string Board::GetMenLayout()
@@ -164,9 +206,9 @@ string Board::GetMenLayout()
 	return MenLayout;
 }
 
-string Board::GetAndUpdateAmountOfTurn(bool isCurrentPlayerWhite)
+string Board::GetAndUpdateAmountOfTurn(bool blackPlayerTurn)
 {
-	if (!isCurrentPlayerWhite) {
+	if (blackPlayerTurn) {
 		turnCounter++;
 	}
 
