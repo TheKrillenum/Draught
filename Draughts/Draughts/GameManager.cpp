@@ -6,6 +6,7 @@ using namespace std;
 
 GameManager::GameManager()
 {
+	DefaultFEN = "W:W31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50:B1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20:H0:F1";
 
 	Player* white = new Player(true);
 	Player* black = new Player(false);
@@ -14,6 +15,35 @@ GameManager::GameManager()
 	allPlayers[1] = black;
 
 	currentPlayer = white;
+}
+
+void GameManager::StartGame()
+{
+	cout << "Welcome to draught player" << endl << "Do you wish to generate the board using a custom FEN ?";
+	cout << endl << "Enter Y for yes or N for no";
+	cout << endl << endl;
+	cout << "[Answer]>";
+
+	string answer;
+	cin >> answer;
+
+	while (answer != "Y" && answer != "N" && answer != "y" && answer != "n") {
+		cout << "Wrong input. You have to input Y for yes and N for no, try again." << endl << endl;
+		cout << "[Answer]>";
+
+		cin >> answer;
+	}
+
+	if (answer == "Y" || answer == "y") {
+		cout << "Please enter your custom FEN (it must be valid)" << endl << endl;
+		cout << "[Custom FEN]>";
+		string FEN;
+		cin >> FEN;
+		Board::GetBoardSingleton()->LoadBoard(FEN);
+	}
+	else {
+		Board::GetBoardSingleton()->LoadBoard(DefaultFEN);
+	}
 }
 
 void GameManager::PlayGame()

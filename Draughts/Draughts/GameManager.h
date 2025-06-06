@@ -9,9 +9,12 @@ private:
 	Player* currentPlayer;
 	Player* allPlayers[2];
 
+	string DefaultFEN;
+
 public: 
 
 	GameManager();
+	void StartGame();
 	void PlayGame();
 	void PlayTurn();
 	PositionStruct PlayerReturnChosenMen(PositionStruct* menToChoose);

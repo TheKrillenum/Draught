@@ -1,7 +1,8 @@
 #pragma once
 #include "PositionStruct.h"
-#include "DynamicArray.h"
+#include "Board.h"
 #include "Men.h"
+#include <vector>
 
 class Player
 {
@@ -18,7 +19,7 @@ public:
 	bool HaveLegalMoveLeft();
 	bool StillHaveMen();
 	PositionStruct* GetHungriestMen(Men* hungryMen);
-	Men* GetAllMenWhoCanEat();
+	vector<Men*>* GetAllMenWhoCanEat();
 	void RemoveMen(Men* men);
 
 	bool GetbWhite();

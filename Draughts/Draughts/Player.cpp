@@ -15,6 +15,33 @@ Player::Player(bool white)
 	}
 }
 
+vector<Men*>* Player::GetAllMenWhoCanEat()
+{
+	vector<Men*>* outputMen = nullptr;
+
+	for (Men* men : remainingMen) {
+		if (men->GetAlive() == false) {
+			for (int i = -1; i < 2; i += 2) {
+				for (int j = -1; j < 2; j += 2) {
+					if (Board::GetBoardSingleton()->GetTile(i, j)->men == nullptr &&
+						Board::GetBoardSingleton()->GetTile(i + 1, j + 1)->men != nullptr &&
+						Board::GetBoardSingleton()->GetTile(i + 1, j + 1)->men->GetAlive() == true &&
+						Board::GetBoardSingleton()->GetTile(i + 1, j + 1)->men->GetWhite() != bWhite) {
+						outputMen->push_back(men);
+					}
+				}
+			}
+		}
+	}
+	if (outputMen->empty()) {
+
+		return nullptr;
+	}
+	else {
+		return outputMen;
+	}
+}
+
 bool Player::GetbWhite()
 {
 	return bWhite;
