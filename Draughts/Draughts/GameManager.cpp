@@ -1,6 +1,4 @@
-#include <iostream>
 #include "GameManager.h"
-#include "Board.h"
 
 using namespace std;
 
@@ -49,8 +47,15 @@ void GameManager::StartGame()
 void GameManager::PlayGame()
 {
 	// debug mode
+	
+	StartGame();	// Load default FEN or a custom given FEN
 
-	// Load FEN
+	for (Player player : allPlayers) {
+		player.InitialiseMen();
+		player.Test();
+	}
+	
+	allPlayers[0]->Test();
 
 	/*
 	string playerTurn = "W";

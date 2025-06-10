@@ -1,5 +1,7 @@
 #include <iostream>
 #include "Board.h"
+#include "TileStruct.h"
+#include "PositionStruct.h"
 
 Board* Board::singleton = nullptr;
 
@@ -86,26 +88,35 @@ string Board::LoadBoard(string FEN)
 	turnCounter = stoi(fullMove);
 
 	whiteMen.erase(0, 1);
-	setupMen(whiteMen, true);
-
 	blackMen.erase(0, 1);
-	setupMen(blackMen, false);
+	setupMen(whiteMen, blackMen);
 
 	return newCurrentPlayer;
 }
 
-void Board::setupMen(string MenLayout, bool bWhite)
+void Board::setupMen(string WhiteLayout, string BlackLayout)
 {
-	stringstream allMenIndexes;
-	allMenIndexes << MenLayout;
-	
-	string smenIndex;
-	int menIndex;
+	stringstream allWhiteMenIndexes;
+	allWhiteMenIndexes << WhiteLayout;
 
-	// Store the index of the first men in menIndex (isolate the string containing the relevant info in
-	// smenIndex, and then convert that string to integer to store the info in menIndex
-	if (getline(allMenIndexes, smenIndex, ',')) {
-		menIndex = stoi(smenIndex);
+	stringstream allBlackMenIndexes;
+	allBlackMenIndexes << BlackLayout;
+	
+	string sWhiteMenIndex;
+	int whiteMenIndex;
+
+	string sBlackMenIndex;
+	int blackMenIndex;
+
+	if (getline(allWhiteMenIndexes, sWhiteMenIndex, ',')) {
+		whiteMenIndex = stoi(sWhiteMenIndex);
+	}
+	else {
+		return;
+	}
+
+	if (getline(allBlackMenIndexes, sBlackMenIndex, ',')) {
+		blackMenIndex = stoi(sBlackMenIndex);
 	}
 	else {
 		return;
@@ -113,19 +124,25 @@ void Board::setupMen(string MenLayout, bool bWhite)
 
 	for (int i = 0; i < 10; i++) {
 		for (int j = 0; j < 10; j++) {
-			if (GetTile( i , j )->index == menIndex) {
-				
-				// if the index of the tile is equal to the men's index, add the men on that tile.
-				GetTile( i, j )->men = new Men(bWhite, PositionStruct{ i, j });
-				
-				// Then, check if there are other men index in the FEN (allMenIndexes). If there are,
-				// update menIndex with the next men's index and continue the loop
-				if (getline(allMenIndexes, smenIndex, ',')) {
-					menIndex = stoi(smenIndex);
+			if (GetTile(i, j)->index != -1) {
+
+				if (GetTile(i, j)->index == whiteMenIndex) {
+
+					GetTile(i, j)->men = new Men(true, PositionStruct{ i, j });
+
+					if (getline(allWhiteMenIndexes, sWhiteMenIndex, ',')) {
+						whiteMenIndex = stoi(sWhiteMenIndex);
+					}
 				}
-				else {
-					return;
+				else if (GetTile(i, j)->index == blackMenIndex) {
+
+					GetTile(i, j)->men = new Men(false, PositionStruct{ i, j });
+
+					if (getline(allBlackMenIndexes, sBlackMenIndex, ',')) {
+						blackMenIndex = stoi(sBlackMenIndex);
+					}
 				}
+
 			}
 		}
 	}
@@ -243,10 +260,10 @@ void Board::DisplayBoard()
 
 						if (GetTile( i , j )->men->GetKing())
 						{
-							cout << "W" << "\t|";
+							cout << "  W" << "\t|";
 						}
 						else {
-							cout << "w" << "\t|";
+							cout << "  w" << "\t|";
 						}
 						
 					}
@@ -254,16 +271,16 @@ void Board::DisplayBoard()
 
 						if (GetTile( i , j )->men->GetKing())
 						{
-							cout << "B" << "\t|";
+							cout << "  B" << "\t|";
 						}
 						else {
-							cout << "b" << "\t|";
+							cout << "  b" << "\t|";
 						}
 						
 					}
 				}
 				else {
-					cout << " e " << "\t|";
+					cout << "  e" << "\t|";
 				}
 			}
 			else {

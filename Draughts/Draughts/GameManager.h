@@ -1,6 +1,10 @@
 #pragma once
+#include "Board.h"
 #include "Player.h"
+#include "Men.h"
 #include "PositionStruct.h"
+#include <iostream>
+
 
 class GameManager
 {

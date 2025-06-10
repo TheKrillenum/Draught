@@ -1,7 +1,7 @@
 #pragma once
-#include "PositionStruct.h"
-#include "DynamicArray.h"
+#include "Board.h"
 #include <vector>
+#include "PositionStruct.h"
 
 using namespace std;
 
@@ -13,17 +13,17 @@ private:
 	bool bAlive;
 	bool bKing;
 	bool bWhite;
-	PositionStruct position;
+	
 
 public:
-
+	PositionStruct position;
 	Men(bool white, PositionStruct initPosition);
 	bool GetWhite();
 	bool GetKing();
 	bool GetAlive();
 	void SetAlive(bool isAlive);
 	void TransformToKing();
-	vector<PositionStruct>* CanEat();
+	vector<PositionStruct> CanEat();
 	vector<PositionStruct>* CanMove();
 	vector<PositionStruct>* LongestEatingRoute(PositionStruct currentPosition);
 };

@@ -3,6 +3,6 @@
 
 struct TileStruct
 {
-	int index;
-	Men* men;
+	int index = 0;
+	Men* men = nullptr;
 };

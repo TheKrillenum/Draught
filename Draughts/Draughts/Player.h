@@ -1,27 +1,33 @@
 #pragma once
-#include "PositionStruct.h"
 #include "Board.h"
 #include "Men.h"
 #include <vector>
+#include "PositionStruct.h"
+#include <iostream>
 
 class Player
 {
 
 private:
 
-	Men* remainingMen[20];
-	Men* remainingKing[20];
+	vector<Men*>* remainingMen;
+	vector<Men*>* remainingKing;
 	bool bWhite;
 
 public:
 
+	// Player logic
 	Player(bool white);
+	void InitialiseMen();
 	bool HaveLegalMoveLeft();
 	bool StillHaveMen();
 	PositionStruct* GetHungriestMen(Men* hungryMen);
-	vector<Men*>* GetAllMenWhoCanEat();
+	vector<Men*> GetAllMenWhoCanEat();
 	void RemoveMen(Men* men);
 
+	// Getters and Setters
 	bool GetbWhite();
+
+	void Test();
 };
 
