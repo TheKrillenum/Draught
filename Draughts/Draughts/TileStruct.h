@@ -5,4 +5,5 @@ struct TileStruct
 {
 	int index = 0;
 	Men* men = nullptr;
+	bool bHighlight = false;
 };

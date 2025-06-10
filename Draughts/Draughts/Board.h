@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <Windows.h>
 
 using namespace std;
 
@@ -17,6 +18,8 @@ private:
 	int turnCounter;
 	int kingMovesCounter;
 
+	HANDLE hConsole; // visual part
+
 public:
 
 	//Getter and Setters
@@ -24,6 +27,8 @@ public:
 	Board& operator=(const Board&) = delete;
 	static Board* GetBoardSingleton();
 
+	int GetTurnCounter();
+	int GetKingMoveCounter();
 	struct TileStruct* GetTile(int row, int column);
 	struct TileStruct* GetTile(const struct PositionStruct& position);
 
@@ -36,5 +41,8 @@ public:
 	string GetMenLayout();
 	string GetAndUpdateAmountOfTurn(bool blackPlayerTurn);
 	void DisplayBoard();
+	bool ValidPosition(const PositionStruct& PositionToCheck);
+
+	void VisualTest();
 };
 

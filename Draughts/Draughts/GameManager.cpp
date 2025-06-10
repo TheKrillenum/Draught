@@ -50,11 +50,10 @@ void GameManager::PlayGame()
 	
 	StartGame();	// Load default FEN or a custom given FEN
 
-	for (Player player : allPlayers) {
-		player.InitialiseMen();
-		player.Test();
+	for (Player* player : allPlayers) {
+		player->InitialiseMen();
 	}
-	
+
 	allPlayers[0]->Test();
 
 	/*
@@ -95,17 +94,16 @@ PositionStruct GameManager::PlayerReturnChosenDestination(PositionStruct chosenM
 
 bool GameManager::CheckGameIsWon()
 {
-	/*
-	Player* temp;
-	
-	if (!currentPlayer->StillHaveMen()) {
+	Player* playerToCheck = (currentPlayer == allPlayers[0]) ? allPlayers[1] : allPlayers[0];
+
+	if (!playerToCheck->StillHaveMen()) {
 		return true;
 	}
 
-	if (!currentPlayer->HaveLegalMoveLeft()) {
+	if (!playerToCheck->HaveLegalMoveLeft()) {
 		return true;
 	}
-	*/
+
 	return false;
 }
 

@@ -5,8 +5,7 @@ Player::Player(bool white)
 {
 	bWhite = white;
 
-	remainingMen = nullptr;
-	remainingKing = nullptr;
+	remainingMen.reserve(20);
 }
 
 void Player::InitialiseMen()
@@ -18,10 +17,10 @@ void Player::InitialiseMen()
 				Board::GetBoardSingleton()->GetTile(i, j)->men->GetWhite() == bWhite) {
 
 				if (Board::GetBoardSingleton()->GetTile(i, j)->men->GetKing()) {
-					remainingKing->push_back(Board::GetBoardSingleton()->GetTile(i, j)->men);
+					remainingKing.push_back(Board::GetBoardSingleton()->GetTile(i, j)->men);
 				}
 				else {
-					remainingMen->push_back(Board::GetBoardSingleton()->GetTile(i, j)->men);
+					remainingMen.push_back(Board::GetBoardSingleton()->GetTile(i, j)->men);
 				}
 			}
 		}
@@ -30,11 +29,27 @@ void Player::InitialiseMen()
 
 bool Player::HaveLegalMoveLeft()
 {
+	for (Men* men : remainingMen) {
+		if (!(men->CanMove().empty())) {
+			return true;
+		}
+	}
+
+	for (Men* men : remainingKing) {
+		if (!(men->CanMove().empty())) {
+			return true;
+		}
+	}
+
 	return false;
 }
 
 bool Player::StillHaveMen()
 {
+	if (remainingMen.empty() && remainingKing.empty()) {
+		return false;
+	}
+
 	return false;
 }
 
@@ -47,14 +62,10 @@ vector<Men*> Player::GetAllMenWhoCanEat()
 {
 	vector<Men*> outputMen;
 
-	for (Men* men : *remainingMen) {
+	for (Men* men : remainingMen) {
 		
-		if (men->CanEat().empty()) {
-			cout << "Men at position (" << men->position.row << "," << men->position.column << ") is not hungry";
-		}
-		else {
+		if (!(men->CanEat().empty())) {
 			outputMen.push_back(men);
-			cout << "Men at position (" << men->position.row << "," << men->position.column << ") is hungry";
 		}
 	}
 
@@ -67,12 +78,12 @@ vector<Men*> Player::GetAllMenWhoCanEat()
 
 void Player::RemoveMen(Men* men)
 {
-	vector<Men*>* menAlive = nullptr;
-	vector<Men*>* kingAlive = nullptr;
+	vector<Men*> menAlive;
+	vector<Men*> kingAlive;
 
-	for (Men* men : *remainingMen) {
+	for (Men* men : remainingMen) {
 		if (men->GetAlive()) {
-			menAlive->push_back(men);
+			menAlive.push_back(men);
 		}
 		else {
 			delete men;
@@ -81,16 +92,16 @@ void Player::RemoveMen(Men* men)
 
 	remainingMen = menAlive;
 
-	for (Men* men : *remainingKing) {
+	for (Men* men : remainingKing) {
 		if (men->GetAlive()) {
-			kingAlive->push_back(men);
+			kingAlive.push_back(men);
 		}
 		else {
 			delete men;
 		}
 	}
 
-	remainingKing = kingAlive;
+	this->remainingKing = kingAlive;
 }
 
 bool Player::GetbWhite()
@@ -100,5 +111,15 @@ bool Player::GetbWhite()
 
 void Player::Test()
 {
-	cout << remainingMen->size() << endl;
+	for (Men* men : remainingMen) {
+		for (PositionStruct pos : men->CanMove()) {
+			Board::GetBoardSingleton()->GetTile(pos)->bHighlight = true;
+		}
+	}
+
+	for (Men* men : remainingKing) {
+		for (PositionStruct pos : men->CanMove()) {
+			Board::GetBoardSingleton()->GetTile(pos)->bHighlight = true;
+		}
+	}
 }

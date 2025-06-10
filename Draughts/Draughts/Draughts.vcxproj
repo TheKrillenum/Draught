@@ -137,7 +137,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
-    <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="EatingList.h" />
     <ClInclude Include="EatingNode.h" />
     <ClInclude Include="GameManager.h" />

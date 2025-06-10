@@ -18,4 +18,3 @@ bool operator==(const PositionStruct& compared) const {
 }
 
 };
-

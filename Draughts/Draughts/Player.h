@@ -10,8 +10,8 @@ class Player
 
 private:
 
-	vector<Men*>* remainingMen;
-	vector<Men*>* remainingKing;
+	vector<Men*> remainingMen;
+	vector<Men*> remainingKing;
 	bool bWhite;
 
 public:
@@ -27,7 +27,6 @@ public:
 
 	// Getters and Setters
 	bool GetbWhite();
-
 	void Test();
 };
 

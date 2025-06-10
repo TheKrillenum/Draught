@@ -11,6 +11,9 @@ Board::Board()
 	kingMovesCounter = 0;
 	turnCounter = 1;
 
+	// Initialise visual attribute
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
 	// loop through all 50 tiles of the board to initialise them. usableTile start
 	// false since the first tile is unusable, and every other tile is also
 	// unusable, so usableTile switches between true and false on each iteration.
@@ -54,6 +57,16 @@ Board* Board::GetBoardSingleton()
 	}
 
 	return singleton;
+}
+
+int Board::GetTurnCounter()
+{
+	return turnCounter;
+}
+
+int Board::GetKingMoveCounter()
+{
+	return kingMovesCounter;
 }
 
 // Overload of GetTile so that it can be called with a PositionStruct or two integers (row and column)
@@ -104,22 +117,34 @@ void Board::setupMen(string WhiteLayout, string BlackLayout)
 	
 	string sWhiteMenIndex;
 	int whiteMenIndex;
+	bool whiteKing = false;
 
 	string sBlackMenIndex;
 	int blackMenIndex;
+	bool blackKing = false;
 
 	if (getline(allWhiteMenIndexes, sWhiteMenIndex, ',')) {
+		
+		if (sWhiteMenIndex[0] == 'K') {
+			whiteKing = true;
+			sWhiteMenIndex.erase(0, 1);
+		}
 		whiteMenIndex = stoi(sWhiteMenIndex);
 	}
 	else {
-		return;
+		whiteMenIndex = 0;
 	}
 
 	if (getline(allBlackMenIndexes, sBlackMenIndex, ',')) {
+		
+		if (sBlackMenIndex[0] == 'K') {
+			blackKing = true;
+			sBlackMenIndex.erase(0, 1);
+		}
 		blackMenIndex = stoi(sBlackMenIndex);
 	}
 	else {
-		return;
+		blackMenIndex = 0;
 	}
 
 	for (int i = 0; i < 10; i++) {
@@ -128,17 +153,30 @@ void Board::setupMen(string WhiteLayout, string BlackLayout)
 
 				if (GetTile(i, j)->index == whiteMenIndex) {
 
-					GetTile(i, j)->men = new Men(true, PositionStruct{ i, j });
+					GetTile(i, j)->men = new Men(true, PositionStruct{ i, j }, whiteKing);
+					whiteKing = false;
 
 					if (getline(allWhiteMenIndexes, sWhiteMenIndex, ',')) {
+						
+						if (sWhiteMenIndex[0] == 'K') {
+							whiteKing = true;
+							sWhiteMenIndex.erase(0, 1);
+						}
 						whiteMenIndex = stoi(sWhiteMenIndex);
 					}
 				}
 				else if (GetTile(i, j)->index == blackMenIndex) {
 
-					GetTile(i, j)->men = new Men(false, PositionStruct{ i, j });
 
+					GetTile(i, j)->men = new Men(false, PositionStruct{ i, j }, blackKing);
+					blackKing = false;
+					
 					if (getline(allBlackMenIndexes, sBlackMenIndex, ',')) {
+						
+						if (sBlackMenIndex[0] == 'K') {
+							blackKing = true;
+							sBlackMenIndex.erase(0, 1);
+						}
 						blackMenIndex = stoi(sBlackMenIndex);
 					}
 				}
@@ -248,8 +286,20 @@ string Board::GetAndUpdateAmountOfTurn(bool blackPlayerTurn)
 
 void Board::DisplayBoard()
 {
+
+	cout << endl;
+	cout << "| -" << "\t|";
+
 	for (int i = 0; i < 10; i++) {
-		cout << "|";
+		cout << "  " << i << "\t|";
+	}
+
+	cout << endl;
+
+	for (int i = 0; i < 10; i++) {
+		SetConsoleTextAttribute(hConsole, 7);
+		cout << "|  " << i << "\t|";
+
 		for (int j = 0; j < 10; j++) {
 
 			if (gameBoard[i][j]->index != -1) {
@@ -260,10 +310,16 @@ void Board::DisplayBoard()
 
 						if (GetTile( i , j )->men->GetKing())
 						{
-							cout << "  W" << "\t|";
+							SetConsoleTextAttribute(hConsole, 9);
+							cout << "  KW";
+							SetConsoleTextAttribute(hConsole, 7); 
+							cout << "\t|";
 						}
 						else {
-							cout << "  w" << "\t|";
+							SetConsoleTextAttribute(hConsole, 9);
+							cout << "  w";
+							SetConsoleTextAttribute(hConsole, 7); 
+							cout << "\t|";
 						}
 						
 					}
@@ -271,22 +327,66 @@ void Board::DisplayBoard()
 
 						if (GetTile( i , j )->men->GetKing())
 						{
-							cout << "  B" << "\t|";
+							SetConsoleTextAttribute(hConsole, 12);
+							cout << "  KB";
+							SetConsoleTextAttribute(hConsole, 7); 
+							cout << "\t|";
 						}
 						else {
-							cout << "  b" << "\t|";
+							SetConsoleTextAttribute(hConsole, 12);
+							cout << "  b";
+							SetConsoleTextAttribute(hConsole, 7); 
+							cout << "\t|";
 						}
 						
 					}
 				}
 				else {
-					cout << "  e" << "\t|";
+					if(GetTile(i, j)->bHighlight) {
+						SetConsoleTextAttribute(hConsole, 14);
+						GetTile(i, j)->bHighlight = false;
+					}
+					else {
+						SetConsoleTextAttribute(hConsole, 7);
+					}
+					
+					cout << "  e";
+					SetConsoleTextAttribute(hConsole, 7);
+					cout << "\t|";
 				}
 			}
 			else {
+				SetConsoleTextAttribute(hConsole, 7);
 				cout << " \t|";
 			}
 		}
+		SetConsoleTextAttribute(hConsole, 7);
 		cout << endl;
+	}
+}
+
+bool Board::ValidPosition(const PositionStruct& PositionToCheck)
+{
+	int row = PositionToCheck.row;
+	int column = PositionToCheck.column;
+
+	if (9 < row || row < 0) {
+		return false;
+	}
+
+	if (9 < column || column < 0) {
+		return false;
+	}
+
+	return true;
+}
+
+void Board::VisualTest()
+{
+
+	for (int k = 1; k < 255; k++)
+	{
+		SetConsoleTextAttribute(hConsole, k);
+		cout << k << " color " << endl;
 	}
 }
