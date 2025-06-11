@@ -53,9 +53,41 @@ bool Player::StillHaveMen()
 	return false;
 }
 
-PositionStruct* Player::GetHungriestMen(Men* hungryMen)
+vector<vector<PositionStruct>>* Player::GetHungriestMen(vector<Men*> hungryMen)
 {
-	return nullptr;
+	vector<vector<PositionStruct>>* output = new vector<vector<PositionStruct>>();
+	vector<vector<PositionStruct>> path;
+	int greatestSize = 0;
+
+	for (Men* men : hungryMen) {
+		vector<PositionStruct> temp;
+		temp.push_back(men->GetPosition());
+		men->LongestEatingRoute(&path, temp, men->GetPosition());
+
+		if (!path.empty()) {
+
+			if (path.front().size() > greatestSize) {
+				greatestSize = path.size();
+
+				if (!output->empty()) {
+					output->clear();
+				}
+
+				for (vector<PositionStruct> p : path) {
+					output->push_back(p);
+				}
+
+			}
+			else if (path.front().size() == greatestSize) {
+				for (vector<PositionStruct> p : path) {
+					output->push_back(p);
+				}
+			}
+
+		}
+	}
+
+	return output;
 }
 
 vector<Men*> Player::GetAllMenWhoCanEat()
@@ -69,8 +101,11 @@ vector<Men*> Player::GetAllMenWhoCanEat()
 		}
 	}
 
-	if (outputMen.empty()) {
-		cout << "There is nothing" << endl;
+	for (Men* men : remainingKing) {
+
+		if (!(men->CanEat().empty())) {
+			outputMen.push_back(men);
+		}
 	}
 
 	return outputMen;
@@ -109,16 +144,22 @@ bool Player::GetbWhite()
 	return bWhite;
 }
 
-void Player::Test()
+vector<Men*> Player::GetAllMenAndKing()
 {
-	for (Men* men : remainingMen) {
-		for (PositionStruct pos : men->CanMove()) {
-			Board::GetBoardSingleton()->GetTile(pos)->bHighlight = true;
-		}
-	}
+	vector<Men*> output;
+	output = remainingMen;
+	output.insert(output.end(), remainingKing.begin(), remainingKing.end());
 
-	for (Men* men : remainingKing) {
-		for (PositionStruct pos : men->CanMove()) {
+	return output;
+}
+
+
+
+
+void Player::Test(vector<vector<PositionStruct>>* test)
+{
+	for (vector<PositionStruct> path : *test) {
+		for (PositionStruct pos : path) {
 			Board::GetBoardSingleton()->GetTile(pos)->bHighlight = true;
 		}
 	}

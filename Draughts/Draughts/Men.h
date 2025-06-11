@@ -5,6 +5,13 @@
 
 using namespace std;
 
+enum Direction {
+	TopRight,
+	TopLeft,
+	BottomRight,
+	BottomLeft
+};
+
 class Men
 {
 
@@ -23,8 +30,11 @@ public:
 	bool GetAlive();
 	void SetAlive(bool isAlive);
 	void TransformToKing();
+	void AppendPositionVector(vector<PositionStruct>* mainVector, vector<PositionStruct> insertVector);
 	vector<PositionStruct> CanEat();
 	vector<PositionStruct> CanMove();
-	vector<PositionStruct> LongestEatingRoute(PositionStruct currentPosition);
-};
+	void LongestEatingRoute(vector<vector<PositionStruct>>* eatingPath, vector<PositionStruct> currentPath, PositionStruct currentPosition);
+	vector<PositionStruct> CheckDirection(Direction dir, PositionStruct currentPosition, bool white, bool king, bool eat);
 
+	PositionStruct GetPosition();
+};

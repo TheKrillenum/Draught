@@ -54,8 +54,13 @@ void GameManager::PlayGame()
 		player->InitialiseMen();
 	}
 
-	allPlayers[0]->Test();
-
+	//Board::GetBoardSingleton()->DisplayBoard();
+	vector<Men*> hungryMen = currentPlayer->GetAllMenWhoCanEat();
+	
+	if (!hungryMen.empty()) {
+		currentPlayer->Test(currentPlayer->GetHungriestMen(hungryMen));
+	}
+	
 	/*
 	string playerTurn = "W";
 
@@ -84,6 +89,13 @@ void GameManager::PlayTurn()
 
 PositionStruct GameManager::PlayerReturnChosenMen(PositionStruct* menToChoose)
 {
+	string sChoice;
+	int choice;
+
+	cout << "Please choose the position ( row , column ) of a Men to be moved" << endl;
+
+	cin >> sChoice;
+
 	return PositionStruct();
 }
 

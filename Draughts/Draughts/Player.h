@@ -21,12 +21,13 @@ public:
 	void InitialiseMen();
 	bool HaveLegalMoveLeft();
 	bool StillHaveMen();
-	PositionStruct* GetHungriestMen(Men* hungryMen);
+	vector<vector<PositionStruct>>* GetHungriestMen(vector<Men*> hungryMen);
 	vector<Men*> GetAllMenWhoCanEat();
 	void RemoveMen(Men* men);
 
 	// Getters and Setters
 	bool GetbWhite();
-	void Test();
+	vector<Men*> GetAllMenAndKing();
+	void Test(vector<vector<PositionStruct>>* test);
 };
 
