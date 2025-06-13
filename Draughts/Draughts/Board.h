@@ -14,7 +14,7 @@ private:
 	static Board* singleton;
 
 	struct TileStruct* gameBoard[10][10];
-	vector<string> fenHistory;
+	vector<string>* fenHistory;
 	int turnCounter;
 	int kingMovesCounter;
 
@@ -29,14 +29,14 @@ public:
 
 	int GetTurnCounter();
 	int GetKingMoveCounter();
-	vector<string> GetFenHistory();
+	vector<string>* GetFenHistory();
 	struct TileStruct* GetTile(int row, int column);
 	struct TileStruct* GetTile(const struct PositionStruct& position);
 
 	// Board logic
 	string LoadBoard(string FEN);
 	void setupMen(string WhiteLayout, string BlackLayout);
-	void MoveMen(struct PositionStruct men, struct PositionStruct destination);
+	void MoveMen(struct PositionStruct men, struct PositionStruct destination, bool menCountForKingMove);
 	void CheckMenBecomeKing(const struct PositionStruct& men);
 	void UpdateFEN(const string& playerTurn);
 	string GetMenLayout();

@@ -4,8 +4,6 @@
 Player::Player(bool white)
 {
 	bWhite = white;
-
-	remainingMen.reserve(20);
 }
 
 void Player::InitialiseMen()
@@ -46,11 +44,11 @@ bool Player::HaveLegalMoveLeft()
 
 bool Player::StillHaveMen()
 {
-	if (remainingMen.empty() && remainingKing.empty()) {
+	if (GetAllMenAndKing().empty()) {
 		return false;
 	}
 
-	return false;
+	return true;
 }
 
 vector<vector<PositionStruct>>* Player::GetHungriestMen(vector<Men*> hungryMen)
@@ -137,6 +135,24 @@ void Player::RemoveMen()
 	}
 
 	this->remainingKing = kingAlive;
+}
+
+bool Player::OneKingLeft()
+{
+	if (remainingKing.size() == 1 && GetAllMenAndKing().size() == 1) {
+		return true;
+	}
+
+	return false;
+}
+
+bool Player::HasAtLeastOneKing()
+{
+	if (remainingKing.empty()) {
+		return false;
+	}
+
+	return true;
 }
 
 bool Player::GetbWhite()

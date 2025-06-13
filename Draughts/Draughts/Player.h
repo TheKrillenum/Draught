@@ -24,6 +24,8 @@ public:
 	vector<vector<PositionStruct>>* GetHungriestMen(vector<Men*> hungryMen);
 	vector<Men*> GetAllMenWhoCanEat();
 	void RemoveMen();
+	bool OneKingLeft();
+	bool HasAtLeastOneKing();
 
 	// Getters and Setters
 	bool GetbWhite();

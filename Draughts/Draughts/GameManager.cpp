@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "TileStruct.h"
+#include <sstream>
 
 using namespace std;
 
@@ -11,6 +12,7 @@ GameManager::GameManager()
 	Player* black = new Player(false);
 
 	gameOngoing = true;
+	situation = FullArmy;
 
 	allPlayers[0] = white;
 	allPlayers[1] = black;
@@ -41,27 +43,37 @@ void GameManager::StartGame()
 		string FEN;
 		cin >> FEN;
 		Board::GetBoardSingleton()->LoadBoard(FEN);
+		Board::GetBoardSingleton()->GetFenHistory()->push_back(FEN);
 	}
+
 	else {
 		Board::GetBoardSingleton()->LoadBoard(DefaultFEN);
+		Board::GetBoardSingleton()->GetFenHistory()->push_back(DefaultFEN);
 	}
 }
 
 void GameManager::PlayGame()
 {
-	// debug mode
 	
 	StartGame();	// Load default FEN or a custom given FEN
 
+	Board::GetBoardSingleton()->DisplayBoard();
+
+	
 	for (Player* player : allPlayers) {
 		player->InitialiseMen();
 	}
+
+	/*
+	* 
+	CheckAmountOfKingMoves();
 
 	while (gameOngoing)
 	{
 		PlayTurn();
 
-		Board::GetBoardSingleton()->UpdateFEN("W");
+		string startingPlayer = (currentPlayer->GetbWhite()) ? "W" : "B";
+		Board::GetBoardSingleton()->UpdateFEN(startingPlayer);
 
 		if (CheckGameIsWon()) {
 			EndGame(currentPlayer);
@@ -75,6 +87,7 @@ void GameManager::PlayGame()
 
 		SwitchCurrentPlayer();
 	}
+	*/
 }
 
 void GameManager::PlayTurn()
@@ -107,7 +120,7 @@ void GameManager::PlayTurn()
 
 		chosenMen = PlayerReturnChosenMen(menToChooseFrom);
 
-		chosenDestination = PlayerReturnChosenDestination(chosenMen);
+		chosenDestination = PlayerReturnChosenDestination(chosenMen, menToChooseFrom);
 
 		if (chosenDestination == PositionStruct{ -1 , -1 }) {
 			confirmChosenMen = true;
@@ -117,8 +130,16 @@ void GameManager::PlayTurn()
 		}
 	}
 	
-	Board::GetBoardSingleton()->MoveMen(chosenMen, chosenDestination);
-	/**/
+	switch (situation) {
+	case FullArmy:
+		Board::GetBoardSingleton()->MoveMen(chosenMen, chosenDestination, false);
+		break;
+	case ThreeMen:
+	case LessThreeMen:
+		Board::GetBoardSingleton()->MoveMen(chosenMen, chosenDestination, true);
+		break;
+	}
+
 	if (longestEatingPaths != nullptr) {
 
 		while (!longestEatingPaths->empty()) {
@@ -131,9 +152,17 @@ void GameManager::PlayTurn()
 
 			}
 
-			chosenDestination = PlayerReturnChosenDestination(chosenMen);
+			chosenDestination = PlayerReturnChosenDestination(chosenMen, menToChooseFrom);
 
-			Board::GetBoardSingleton()->MoveMen(chosenMen, chosenDestination);
+			switch (situation) {
+			case FullArmy:
+				Board::GetBoardSingleton()->MoveMen(chosenMen, chosenDestination, false);
+				break;
+			case ThreeMen:
+			case LessThreeMen:
+				Board::GetBoardSingleton()->MoveMen(chosenMen, chosenDestination, true);
+				break;
+			}
 		}
 
 	}
@@ -200,7 +229,7 @@ bool GameManager::CheckGameIsWon()
 {
 	Player* playerToCheck = (currentPlayer == allPlayers[0]) ? allPlayers[1] : allPlayers[0];
 
-	if (!playerToCheck->StillHaveMen()) {
+	if (!(playerToCheck->StillHaveMen())) {
 		return true;
 	}
 
@@ -229,34 +258,84 @@ bool GameManager::CheckGameIsDraw()
 
 bool GameManager::CheckAmountOfKingMoves()
 {
+	if (allPlayers[0]->OneKingLeft() || allPlayers[1]->OneKingLeft()) {
+
+		if (allPlayers[0]->OneKingLeft() && allPlayers[1]->OneKingLeft()) {
+			situation = LessThreeMen;
+		}
+		else {
+
+			Player* playerWithMoreThenOneKing = (allPlayers[0]->OneKingLeft()) ? allPlayers[1] : allPlayers[0];
+
+			if (playerWithMoreThenOneKing->HasAtLeastOneKing()) {
+
+				if (playerWithMoreThenOneKing->GetAllMenAndKing().size() == 3) {
+					situation = ThreeMen;
+				}
+				else if (playerWithMoreThenOneKing->GetAllMenAndKing().size() < 3) {
+					situation = LessThreeMen;
+				}
+				else {
+					situation = FullArmy;
+				}
+			}
+			else {
+				situation = FullArmy;
+			}
+		}
+	}
+
 	int kingMoves = Board::GetBoardSingleton()->GetKingMoveCounter();
 
-	if (kingMoves >= 50) {
-		return true;
+	switch (situation) {
+	case FullArmy:
+		if (kingMoves >= 50) {
+			return true;
+		}
+		break;
+	case ThreeMen:
+		if (kingMoves >= 36) {
+			return true;
+		}
+		break;
+	case LessThreeMen:
+		if (kingMoves >= 10) {
+			return true;
+		}
+		break;
 	}
-	else if () {
 
-	}
-	else if () {
-
-	}
 	return false;
 }
 
 bool GameManager::CheckRepetitionFEN()
 {
-	vector<string> allFen = Board::GetBoardSingleton()->GetFenHistory();
+	vector<string>* allFen = Board::GetBoardSingleton()->GetFenHistory();
 
-	for (string fenToCheck : allFen) {
+	for (string fenToCheck : *allFen) {
+
 		int repetition = 0;
 
-		for (string fen : allFen) {
-			if (fenToCheck == fen) {
+		stringstream  relevantStreamFenToCheck;
+		string relevantStringFenToCheck;
+		relevantStreamFenToCheck << fenToCheck;
+
+		getline(relevantStreamFenToCheck, relevantStringFenToCheck, 'H');
+
+		for (string fen : *allFen) {
+
+			stringstream  relevantStreamFen;
+			string relevantStringFen;
+			relevantStreamFen << fen;
+
+			getline(relevantStreamFen, relevantStringFen, 'H');
+
+			if (relevantStringFen == relevantStringFenToCheck) {
 				repetition++;
 			}
 		}
 
-		if (repetition > 3) {
+		if (repetition >= 3) {
 
 			return true;
 		}
@@ -289,16 +368,6 @@ void GameManager::EndGame(Player winner)
 	}
 
 	gameOngoing = false;
-}
-
-void GameManager::GetCurrentPlayer()
-{
-	if (currentPlayer->GetbWhite()) {
-		cout << "white player." << endl;
-	}
-	else {
-		cout << "black player." << endl;
-	}
 }
 
 void GameManager::removeWhiteSpace(string& inputLine) {

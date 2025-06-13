@@ -8,6 +8,8 @@ Board* Board::singleton = nullptr;
 
 Board::Board()
 {
+	fenHistory = new vector<string>;
+
 	// Initialise counter values
 	kingMovesCounter = 0;
 	turnCounter = 1;
@@ -70,7 +72,7 @@ int Board::GetKingMoveCounter()
 	return kingMovesCounter;
 }
 
-vector<string> Board::GetFenHistory()
+vector<string>* Board::GetFenHistory()
 {
 	return fenHistory;
 }
@@ -192,7 +194,7 @@ void Board::setupMen(string WhiteLayout, string BlackLayout)
 	}
 }
 
-void Board::MoveMen(PositionStruct men, PositionStruct destination)
+void Board::MoveMen(PositionStruct men, PositionStruct destination, bool menCountForKingMove)
 {
 	//Check the direction in which to check via rowIncrement and columnIncrement, and save the current position to check
 	int rowIncrement = (men.row - destination.row < 0) ? 1 : -1;
@@ -208,7 +210,16 @@ void Board::MoveMen(PositionStruct men, PositionStruct destination)
 			GetTile(positionToCheck)->men->GetAlive()) {
 
 			GetTile(positionToCheck)->men->SetAlive(false);
+
+			kingMovesCounter = 0;
+
 			break;
+
+		}
+		else {
+			if (GetTile(men)->men->GetKing() || menCountForKingMove) {
+				kingMovesCounter++;
+			}
 		}
 
 		positionToCheck.row += rowIncrement;
@@ -243,7 +254,7 @@ void Board::CheckMenBecomeKing(const PositionStruct& men)
 
 void Board::UpdateFEN(const string& playerTurn)
 {
-	fenHistory.push_back(playerTurn + GetMenLayout() + ":H" + to_string(kingMovesCounter) + GetAndUpdateAmountOfTurn(playerTurn == "B"));
+	fenHistory->push_back(playerTurn + GetMenLayout() + ":H" + to_string(kingMovesCounter) + GetAndUpdateAmountOfTurn(playerTurn == "B"));
 }
 
 string Board::GetMenLayout()
@@ -371,6 +382,8 @@ void Board::DisplayBoard()
 		cout << endl;
 	}
 
+	cout << endl << " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl << endl;
+	cout << "FEN: " << fenHistory->back() << endl;
 	cout << endl << " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl << endl;
 }
 
