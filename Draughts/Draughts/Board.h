@@ -29,6 +29,7 @@ public:
 
 	int GetTurnCounter();
 	int GetKingMoveCounter();
+	vector<string> GetFenHistory();
 	struct TileStruct* GetTile(int row, int column);
 	struct TileStruct* GetTile(const struct PositionStruct& position);
 

@@ -2,6 +2,7 @@
 #include "Board.h"
 #include "TileStruct.h"
 #include "PositionStruct.h"
+#include <cstdlib>
 
 Board* Board::singleton = nullptr;
 
@@ -67,6 +68,11 @@ int Board::GetTurnCounter()
 int Board::GetKingMoveCounter()
 {
 	return kingMovesCounter;
+}
+
+vector<string> Board::GetFenHistory()
+{
+	return fenHistory;
 }
 
 // Overload of GetTile so that it can be called with a PositionStruct or two integers (row and column)
@@ -286,6 +292,7 @@ string Board::GetAndUpdateAmountOfTurn(bool blackPlayerTurn)
 
 void Board::DisplayBoard()
 {
+	system("cls");
 
 	cout << endl;
 	cout << "| -" << "\t|";
@@ -363,6 +370,8 @@ void Board::DisplayBoard()
 		SetConsoleTextAttribute(hConsole, 7);
 		cout << endl;
 	}
+
+	cout << endl << " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl << endl;
 }
 
 bool Board::ValidPosition(const PositionStruct& PositionToCheck)

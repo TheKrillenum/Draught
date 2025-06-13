@@ -13,6 +13,8 @@ private:
 	Player* currentPlayer;
 	Player* allPlayers[2];
 
+	bool gameOngoing;
+
 	string DefaultFEN;
 
 public: 
@@ -21,8 +23,8 @@ public:
 	void StartGame();
 	void PlayGame();
 	void PlayTurn();
-	PositionStruct PlayerReturnChosenMen(PositionStruct* menToChoose);
-	PositionStruct PlayerReturnChosenDestination(PositionStruct chosenMen /* LegalEatingStruct availableDestination */);
+	PositionStruct PlayerReturnChosenMen(const vector<PositionStruct>& menToChoose);
+	PositionStruct PlayerReturnChosenDestination(PositionStruct chosenMen, vector<PositionStruct> availableMen);
 	bool CheckGameIsWon();
 	bool CheckGameIsDraw();
 	bool CheckAmountOfKingMoves();
@@ -32,6 +34,9 @@ public:
 	void EndGame(Player winner);
 
 	void GetCurrentPlayer();
+
+	void removeWhiteSpace(string& inputLine);
+	bool getValidPlayerInput(PositionStruct& position);
 
 };
 

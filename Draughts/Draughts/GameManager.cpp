@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include "TileStruct.h"
 
 using namespace std;
 
@@ -8,6 +9,8 @@ GameManager::GameManager()
 
 	Player* white = new Player(true);
 	Player* black = new Player(false);
+
+	gameOngoing = true;
 
 	allPlayers[0] = white;
 	allPlayers[1] = black;
@@ -54,17 +57,7 @@ void GameManager::PlayGame()
 		player->InitialiseMen();
 	}
 
-	//Board::GetBoardSingleton()->DisplayBoard();
-	vector<Men*> hungryMen = currentPlayer->GetAllMenWhoCanEat();
-	
-	if (!hungryMen.empty()) {
-		currentPlayer->Test(currentPlayer->GetHungriestMen(hungryMen));
-	}
-	
-	/*
-	string playerTurn = "W";
-
-	while (true)
+	while (gameOngoing)
 	{
 		PlayTurn();
 
@@ -72,36 +65,135 @@ void GameManager::PlayGame()
 
 		if (CheckGameIsWon()) {
 			EndGame(currentPlayer);
+			break;
 		}
 
 		if (CheckGameIsDraw()) {
 			DrawGame();
+			break;
 		}
 
 		SwitchCurrentPlayer();
 	}
-	*/
 }
 
 void GameManager::PlayTurn()
 {
+
+	vector<Men*> hungryMen;
+	vector<vector<PositionStruct>>* longestEatingPaths = nullptr;
+	bool pathAvailable = false;
+	vector<PositionStruct> menToChooseFrom;
+
+	hungryMen = currentPlayer->GetAllMenWhoCanEat();
+
+	if (!hungryMen.empty()) {
+
+		longestEatingPaths = currentPlayer->GetHungriestMen(hungryMen);
+
+		for (vector<PositionStruct> individualPath : *longestEatingPaths) {
+			
+			menToChooseFrom.push_back(individualPath.front());
+
+		}
+	}
+
+
+	PositionStruct chosenMen;
+	PositionStruct chosenDestination;
+	bool confirmChosenMen = true;
+
+	while (confirmChosenMen) {
+
+		chosenMen = PlayerReturnChosenMen(menToChooseFrom);
+
+		chosenDestination = PlayerReturnChosenDestination(chosenMen);
+
+		if (chosenDestination == PositionStruct{ -1 , -1 }) {
+			confirmChosenMen = true;
+		}
+		else {
+			confirmChosenMen = false;
+		}
+	}
+	
+	Board::GetBoardSingleton()->MoveMen(chosenMen, chosenDestination);
+	/**/
+	if (longestEatingPaths != nullptr) {
+
+		while (!longestEatingPaths->empty()) {
+
+			longestEatingPaths->erase(longestEatingPaths->begin());
+
+			for (vector<PositionStruct> individualPath : *longestEatingPaths) {
+
+				menToChooseFrom.push_back(individualPath.front());
+
+			}
+
+			chosenDestination = PlayerReturnChosenDestination(chosenMen);
+
+			Board::GetBoardSingleton()->MoveMen(chosenMen, chosenDestination);
+		}
+
+	}
+
+	Board::GetBoardSingleton()->CheckMenBecomeKing(chosenMen);
+
+	Player* oppositePlayer = (currentPlayer == allPlayers[0]) ? allPlayers[1] : allPlayers[0];
+
+	oppositePlayer->RemoveMen();
 }
 
-PositionStruct GameManager::PlayerReturnChosenMen(PositionStruct* menToChoose)
+PositionStruct GameManager::PlayerReturnChosenMen(const vector<PositionStruct>& menToChoose)
 {
-	string sChoice;
-	int choice;
+	PositionStruct chosenMen;
+	bool validChoice = false;
 
-	cout << "Please choose the position ( row , column ) of a Men to be moved" << endl;
+	while (!validChoice) {
 
-	cin >> sChoice;
+		while (getValidPlayerInput(chosenMen));
 
-	return PositionStruct();
+		if (!menToChoose.empty()) {
+
+			for (PositionStruct pos : menToChoose) {
+				if (pos == chosenMen) {
+					validChoice = true;
+				}
+			}
+
+		}
+		else {
+			validChoice = true;
+		}
+	}
+
+	return chosenMen;
 }
 
-PositionStruct GameManager::PlayerReturnChosenDestination(PositionStruct chosenMen)
+PositionStruct GameManager::PlayerReturnChosenDestination(PositionStruct chosenMen, vector<PositionStruct> availableMen)
 {
-	return PositionStruct();
+
+	if (Board::GetBoardSingleton()->GetTile(chosenMen)->men == nullptr) {
+		return PositionStruct{ -1 , -1 };
+	}
+
+	vector <PositionStruct> destinationChoice;
+
+	destinationChoice = Board::GetBoardSingleton()->GetTile(chosenMen)->men->CanMove();
+
+	if (destinationChoice.empty()) {
+		return PositionStruct{ -1 , -1 };
+	}
+
+	PositionStruct playerChoice;
+	
+
+	
+
+
+
+	return playerChoice;
 }
 
 bool GameManager::CheckGameIsWon()
@@ -121,12 +213,12 @@ bool GameManager::CheckGameIsWon()
 
 bool GameManager::CheckGameIsDraw()
 {
-	/*
 	for (Player * player : allPlayers)
 	{
-		CheckAmountOfKingMoves();
+		if (CheckAmountOfKingMoves()) {
+			return true;
+		}
 	}
-	*/
 
 	if (CheckRepetitionFEN()) {
 		return true;
@@ -137,11 +229,39 @@ bool GameManager::CheckGameIsDraw()
 
 bool GameManager::CheckAmountOfKingMoves()
 {
+	int kingMoves = Board::GetBoardSingleton()->GetKingMoveCounter();
+
+	if (kingMoves >= 50) {
+		return true;
+	}
+	else if () {
+
+	}
+	else if () {
+
+	}
 	return false;
 }
 
 bool GameManager::CheckRepetitionFEN()
 {
+	vector<string> allFen = Board::GetBoardSingleton()->GetFenHistory();
+
+	for (string fenToCheck : allFen) {
+		int repetition = 0;
+
+		for (string fen : allFen) {
+			if (fenToCheck == fen) {
+				repetition++;
+			}
+		}
+
+		if (repetition > 3) {
+
+			return true;
+		}
+	}
+
 	return false;
 }
 
@@ -153,6 +273,8 @@ void GameManager::SwitchCurrentPlayer()
 void GameManager::DrawGame()
 {
 	cout << "Game is a draw ! There is no winner.";
+
+	gameOngoing = false;
 }
 
 void GameManager::EndGame(Player winner)
@@ -165,6 +287,8 @@ void GameManager::EndGame(Player winner)
 	else {
 		cout << "black player.";
 	}
+
+	gameOngoing = false;
 }
 
 void GameManager::GetCurrentPlayer()
@@ -175,4 +299,46 @@ void GameManager::GetCurrentPlayer()
 	else {
 		cout << "black player." << endl;
 	}
+}
+
+void GameManager::removeWhiteSpace(string& inputLine) {
+	int count = 0;
+	int i = 0;
+
+	while (inputLine[i++] == ' ') count++;
+
+	inputLine.erase(0, count);
+
+	i = inputLine.length() - 1;
+	count = 0;
+
+	while (inputLine[i--] == ' ') count++;
+
+	inputLine.erase(inputLine.length() - count, count);
+
+
+}
+
+bool GameManager::getValidPlayerInput(PositionStruct& position) {
+
+	Board::GetBoardSingleton()->DisplayBoard();
+
+	cout << "Please choose the position of a Men to be moved by entering" << endl;
+	cout << "it's position in the form 'row column', seperate by a white space" << endl;
+	cout << "[ChosenMen'sPosition]>";
+
+	string inputLine;
+	do {
+		getline(cin, inputLine);
+	} while (inputLine == "");
+
+	removeWhiteSpace(inputLine);
+
+	stringstream inputStream(inputLine);
+
+	bool fail1 = (inputStream >> position.row).fail();
+	bool fail2 = (inputStream >> position.column).fail();
+	bool fail3 = inputStream.peek() != EOF;
+
+	return !fail1 && !fail2 && !fail3 && !Board::GetBoardSingleton()->ValidPosition(position);
 }

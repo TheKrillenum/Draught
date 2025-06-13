@@ -9,13 +9,12 @@ using namespace std;
 int main()
 {
     GameManager gm;
-    cout << "Test initiated";
-    cout << endl;
 
-    gm.PlayGame();
-    Board::GetBoardSingleton()->DisplayBoard();
+    //gm.PlayGame();
+    vector<PositionStruct> test;
+    gm.PlayerReturnChosenMen(test);
+    //Board::GetBoardSingleton()->DisplayBoard();
     //Board::GetBoardSingleton()->VisualTest();
-    cout << endl << endl;
 
     return 0;
 }

@@ -232,7 +232,6 @@ void Men::LongestEatingRoute(vector<vector<PositionStruct>>* eatingPath, vector<
 
 		if (!destination.empty()) {
 
-			PositionStruct debug = destination.front();
 			enemyPosition.row = ((destination.front().row - currentPosition.row) > 0) ? destination.front().row - 1 : destination.front().row + 1;
 			enemyPosition.column = ((destination.front().column - currentPosition.column) > 0) ? destination.front().column - 1 : destination.front().column + 1;
 

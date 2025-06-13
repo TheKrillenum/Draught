@@ -111,7 +111,7 @@ vector<Men*> Player::GetAllMenWhoCanEat()
 	return outputMen;
 }
 
-void Player::RemoveMen(Men* men)
+void Player::RemoveMen()
 {
 	vector<Men*> menAlive;
 	vector<Men*> kingAlive;
