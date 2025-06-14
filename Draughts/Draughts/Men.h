@@ -37,4 +37,5 @@ public:
 	vector<PositionStruct> CheckDirection(Direction dir, PositionStruct currentPosition, bool white, bool king, bool eat);
 
 	PositionStruct GetPosition();
+	void SetPosition(PositionStruct newPosition);
 };

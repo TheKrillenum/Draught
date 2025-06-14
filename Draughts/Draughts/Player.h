@@ -30,6 +30,5 @@ public:
 	// Getters and Setters
 	bool GetbWhite();
 	vector<Men*> GetAllMenAndKing();
-	void Test(vector<vector<PositionStruct>>* test);
 };
 

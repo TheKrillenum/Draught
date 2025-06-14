@@ -65,7 +65,7 @@ vector<vector<PositionStruct>>* Player::GetHungriestMen(vector<Men*> hungryMen)
 		if (!path.empty()) {
 
 			if (path.front().size() > greatestSize) {
-				greatestSize = path.size();
+				greatestSize = path.front().size();
 
 				if (!output->empty()) {
 					output->clear();
@@ -83,6 +83,8 @@ vector<vector<PositionStruct>>* Player::GetHungriestMen(vector<Men*> hungryMen)
 			}
 
 		}
+
+		path.clear();
 	}
 
 	return output;
@@ -119,6 +121,7 @@ void Player::RemoveMen()
 			menAlive.push_back(men);
 		}
 		else {
+			Board::GetBoardSingleton()->GetTile(men->GetPosition())->men = nullptr;
 			delete men;
 		}
 	}
@@ -130,6 +133,7 @@ void Player::RemoveMen()
 			kingAlive.push_back(men);
 		}
 		else {
+			Board::GetBoardSingleton()->GetTile(men->GetPosition())->men = nullptr;
 			delete men;
 		}
 	}
@@ -167,16 +171,4 @@ vector<Men*> Player::GetAllMenAndKing()
 	output.insert(output.end(), remainingKing.begin(), remainingKing.end());
 
 	return output;
-}
-
-
-
-
-void Player::Test(vector<vector<PositionStruct>>* test)
-{
-	for (vector<PositionStruct> path : *test) {
-		for (PositionStruct pos : path) {
-			Board::GetBoardSingleton()->GetTile(pos)->bHighlight = true;
-		}
-	}
 }

@@ -43,7 +43,5 @@ public:
 	string GetAndUpdateAmountOfTurn(bool blackPlayerTurn);
 	void DisplayBoard();
 	bool ValidPosition(const PositionStruct& PositionToCheck);
-
-	void VisualTest();
 };
 

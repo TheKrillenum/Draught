@@ -32,7 +32,7 @@ public:
 	void PlayTurn();
 
 	PositionStruct PlayerReturnChosenMen(const vector<PositionStruct>& menToChoose);
-	PositionStruct PlayerReturnChosenDestination(PositionStruct chosenMen, vector<PositionStruct> availableMen);
+	PositionStruct PlayerReturnChosenDestination(PositionStruct chosenDestination, vector<PositionStruct> availableDestination);
 
 	bool CheckGameIsWon();
 	bool CheckGameIsDraw();
@@ -46,5 +46,6 @@ public:
 	void removeWhiteSpace(string& inputLine);
 	bool getValidPlayerInput(PositionStruct& position);
 
+	void Test(vector<vector<PositionStruct>>* pinus, vector<PositionStruct> pi2);
 };
 

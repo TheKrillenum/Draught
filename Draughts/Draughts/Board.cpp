@@ -102,11 +102,21 @@ string Board::LoadBoard(string FEN)
 	getline(SSFEN, kingMove, ':');
 	getline(SSFEN, fullMove, ':');
 
-	kingMove.erase(0, 1);
-	kingMovesCounter = stoi(kingMove);
+	if (kingMove.empty()) {
+		kingMovesCounter = 0;
+	}
+	else {
+		kingMove.erase(0, 1);
+		kingMovesCounter = stoi(kingMove);
+	}
 
-	fullMove.erase(0, 1);
-	turnCounter = stoi(fullMove);
+	if (kingMove.empty()) {
+		turnCounter = 0;
+	}
+	else {
+		fullMove.erase(0, 1);
+		turnCounter = stoi(fullMove);
+	}
 
 	whiteMen.erase(0, 1);
 	blackMen.erase(0, 1);
@@ -196,6 +206,8 @@ void Board::setupMen(string WhiteLayout, string BlackLayout)
 
 void Board::MoveMen(PositionStruct men, PositionStruct destination, bool menCountForKingMove)
 {
+	bool menEaten = false;
+
 	//Check the direction in which to check via rowIncrement and columnIncrement, and save the current position to check
 	int rowIncrement = (men.row - destination.row < 0) ? 1 : -1;
 	int columnIncrement = (men.column - destination.column < 0) ? 1 : -1;
@@ -212,23 +224,26 @@ void Board::MoveMen(PositionStruct men, PositionStruct destination, bool menCoun
 			GetTile(positionToCheck)->men->SetAlive(false);
 
 			kingMovesCounter = 0;
+			menEaten = true;
 
 			break;
 
-		}
-		else {
-			if (GetTile(men)->men->GetKing() || menCountForKingMove) {
-				kingMovesCounter++;
-			}
 		}
 
 		positionToCheck.row += rowIncrement;
 		positionToCheck.column += columnIncrement;
 	}
 	
+	if ((GetTile(men)->men->GetKing() || menCountForKingMove) && !menEaten) {
+		kingMovesCounter++;
+	}
+
 	// Move the men from his current tile to the destination tile
-	gameBoard[destination.row][destination.column]->men = gameBoard[men.row][men.column]->men;
-	gameBoard[men.row][men.column]->men = nullptr;
+	GetTile(destination)->men = GetTile(men)->men;
+	GetTile(men)->men = nullptr;
+
+	// Update the new position of the men
+	GetTile(destination)->men->SetPosition(destination);
 }
 
 void Board::CheckMenBecomeKing(const PositionStruct& men)
@@ -279,10 +294,14 @@ string Board::GetMenLayout()
 	
 	// Convert the stringstream to string to remove the last comma
 	string finalWhiteLayout = whiteLayout.str();
-	finalWhiteLayout.pop_back();
+	if (!finalWhiteLayout.empty()) {
+		finalWhiteLayout.pop_back();
+	}
 
 	string finalBlackLayout = blackLayout.str();
-	finalBlackLayout.pop_back();
+	if (!finalBlackLayout.empty()) {
+		finalBlackLayout.pop_back();
+	}
 
 	// Put everzthing together and return it
 	MenLayout = ":W" + finalWhiteLayout + ":B" + finalBlackLayout;
@@ -328,13 +347,25 @@ void Board::DisplayBoard()
 
 						if (GetTile( i , j )->men->GetKing())
 						{
-							SetConsoleTextAttribute(hConsole, 9);
+							if (GetTile(i, j)->bHighlight) {
+								SetConsoleTextAttribute(hConsole, 14);
+								GetTile(i, j)->bHighlight = false;
+							}
+							else {
+								SetConsoleTextAttribute(hConsole, 9);
+							}
 							cout << "  KW";
 							SetConsoleTextAttribute(hConsole, 7); 
 							cout << "\t|";
 						}
 						else {
-							SetConsoleTextAttribute(hConsole, 9);
+							if (GetTile(i, j)->bHighlight) {
+								SetConsoleTextAttribute(hConsole, 14);
+								GetTile(i, j)->bHighlight = false;
+							}
+							else {
+								SetConsoleTextAttribute(hConsole, 9);
+							}
 							cout << "  w";
 							SetConsoleTextAttribute(hConsole, 7); 
 							cout << "\t|";
@@ -345,13 +376,25 @@ void Board::DisplayBoard()
 
 						if (GetTile( i , j )->men->GetKing())
 						{
-							SetConsoleTextAttribute(hConsole, 12);
+							if (GetTile(i, j)->bHighlight) {
+								SetConsoleTextAttribute(hConsole, 14);
+								GetTile(i, j)->bHighlight = false;
+							}
+							else {
+								SetConsoleTextAttribute(hConsole, 12);
+							}
 							cout << "  KB";
 							SetConsoleTextAttribute(hConsole, 7); 
 							cout << "\t|";
 						}
 						else {
-							SetConsoleTextAttribute(hConsole, 12);
+							if (GetTile(i, j)->bHighlight) {
+								SetConsoleTextAttribute(hConsole, 14);
+								GetTile(i, j)->bHighlight = false;
+							}
+							else {
+								SetConsoleTextAttribute(hConsole, 12);
+							}
 							cout << "  b";
 							SetConsoleTextAttribute(hConsole, 7); 
 							cout << "\t|";
@@ -401,14 +444,4 @@ bool Board::ValidPosition(const PositionStruct& PositionToCheck)
 	}
 
 	return true;
-}
-
-void Board::VisualTest()
-{
-
-	for (int k = 1; k < 255; k++)
-	{
-		SetConsoleTextAttribute(hConsole, k);
-		cout << k << " color " << endl;
-	}
 }

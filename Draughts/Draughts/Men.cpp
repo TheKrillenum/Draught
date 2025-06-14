@@ -116,90 +116,15 @@ vector<PositionStruct> Men::CanMove()
 {
 	vector<PositionStruct> output;
 
-	/*
-	* 
-	*	DEPRECATED
-	* 
-	int CheckDirection = (bWhite) ? -1 : 1;
+	if ((bKing == true) || (bWhite == true)) {
+		AppendPositionVector(&output, CheckDirection(TopRight, position, bWhite, bKing, false));
+		AppendPositionVector(&output, CheckDirection(TopLeft, position, bWhite, bKing, false));
+	}
 
-	PositionStruct rightTile;
-	PositionStruct leftTile;
-	int increment = 1;
-	bool bTilesAvailable = true;
-
-	// these represent forward-right (fr), forward-left (fl), backward-right (br) and backward-left (bl). They are meant to keep 
-	// track of any blockus in a direction: if this Men is blocked from continuing in a direction, further tiles in that same
-	// direction won't be checked.
-	bool fr = true;
-	bool fl = true;
-	bool br = true;
-	bool bl = true;
-
-	while(bTilesAvailable){
-		
-		bTilesAvailable = false;
-
-		rightTile = PositionStruct{ position.row + (CheckDirection * increment), position.column + increment };
-		leftTile = PositionStruct{ position.row + (CheckDirection * increment), position.column - increment };
-
-		if (Board::GetBoardSingleton()->ValidPosition(rightTile) &&
-			Board::GetBoardSingleton()->GetTile(rightTile)->men == nullptr &&
-			fr) {
-			
-			output.push_back(rightTile);
-			bTilesAvailable = true;
-		}
-		else {
-			fr = false;
-		}
-
-		if (Board::GetBoardSingleton()->ValidPosition(leftTile) &&
-			Board::GetBoardSingleton()->GetTile(leftTile)->men == nullptr &&
-			fl) {
-			
-			output.push_back(leftTile);
-			bTilesAvailable = true;
-		}
-		else {
-			fl = false;
-		}
-
-		if (!bKing) {
-			break;
-		}
-
-		rightTile = PositionStruct{ position.row + (CheckDirection * increment *-1), position.column + increment };
-		leftTile = PositionStruct{ position.row + (CheckDirection * increment *-1), position.column - increment };
-
-		if (Board::GetBoardSingleton()->ValidPosition(rightTile) &&
-			Board::GetBoardSingleton()->GetTile(rightTile)->men == nullptr &&
-			br) {
-
-			output.push_back(rightTile);
-			bTilesAvailable = true;
-		}
-		else {
-			br = false;
-		}
-
-		if (Board::GetBoardSingleton()->ValidPosition(leftTile) &&
-			Board::GetBoardSingleton()->GetTile(leftTile)->men == nullptr &&
-			bl) {
-
-			output.push_back(leftTile);
-			bTilesAvailable = true;
-		}
-		else {
-			bl = false;
-		}
-
-		increment++;
-	}*/
-
-	AppendPositionVector(&output, CheckDirection(TopRight, position, bWhite, bKing, false));
-	AppendPositionVector(&output, CheckDirection(TopLeft, position, bWhite, bKing, false));
-	AppendPositionVector(&output, CheckDirection(BottomRight, position, bWhite, bKing, false));
-	AppendPositionVector(&output, CheckDirection(BottomLeft, position, bWhite, bKing, false));
+	if ((bKing == true) || (bWhite == false)) {
+		AppendPositionVector(&output, CheckDirection(BottomRight, position, bWhite, bKing, false));
+		AppendPositionVector(&output, CheckDirection(BottomLeft, position, bWhite, bKing, false));
+	}
 
 	return output;
 }
@@ -237,11 +162,14 @@ void Men::LongestEatingRoute(vector<vector<PositionStruct>>* eatingPath, vector<
 
 			Board::GetBoardSingleton()->GetTile(enemyPosition)->men->SetAlive(false);
 
-			currentPath.push_back(destination.front());
+			vector<PositionStruct> branch = currentPath;
 
-			LongestEatingRoute(eatingPath, currentPath, destination.front());
+			branch.push_back(destination.front());
+
+			LongestEatingRoute(eatingPath, branch, destination.front());
 
 			Board::GetBoardSingleton()->GetTile(enemyPosition)->men->SetAlive(true);
+
 		}
 		else {
 			
@@ -249,8 +177,17 @@ void Men::LongestEatingRoute(vector<vector<PositionStruct>>* eatingPath, vector<
 
 				if (eatingPath->front().size() == currentPath.size()) {
 
-					eatingPath->push_back(currentPath);
+					bool unique = true;
 
+					for (vector<PositionStruct> pos : *eatingPath) {
+						if (pos == currentPath) {
+							unique = false;
+						}
+					}
+
+					if (unique) {
+						eatingPath->push_back(currentPath);
+					}
 				}
 				else if (eatingPath->front().size() < currentPath.size()) {
 					eatingPath->clear();
@@ -335,4 +272,9 @@ vector<PositionStruct> Men::CheckDirection(Direction dir, PositionStruct current
 PositionStruct Men::GetPosition()
 {
 	return position;
+}
+
+void Men::SetPosition(PositionStruct newPosition)
+{
+	position = newPosition;
 }
