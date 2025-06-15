@@ -248,9 +248,6 @@ void Board::MoveMen(PositionStruct men, PositionStruct destination, bool menCoun
 
 void Board::CheckMenBecomeKing(const PositionStruct& men)
 {	
-	// Check if a White men is on row [0] or if a black men
-	// is on row [9]. If either is the case, transform said
-	// men into a king.
 
 	Men* menToCheck = gameBoard[men.row][men.column]->men;
 
@@ -349,7 +346,7 @@ void Board::DisplayBoard()
 						{
 							if (GetTile(i, j)->bHighlight) {
 								SetConsoleTextAttribute(hConsole, 14);
-								GetTile(i, j)->bHighlight = false;
+								//GetTile(i, j)->bHighlight = false;
 							}
 							else {
 								SetConsoleTextAttribute(hConsole, 9);
@@ -361,7 +358,7 @@ void Board::DisplayBoard()
 						else {
 							if (GetTile(i, j)->bHighlight) {
 								SetConsoleTextAttribute(hConsole, 14);
-								GetTile(i, j)->bHighlight = false;
+								//GetTile(i, j)->bHighlight = false;
 							}
 							else {
 								SetConsoleTextAttribute(hConsole, 9);
@@ -378,7 +375,7 @@ void Board::DisplayBoard()
 						{
 							if (GetTile(i, j)->bHighlight) {
 								SetConsoleTextAttribute(hConsole, 14);
-								GetTile(i, j)->bHighlight = false;
+								//GetTile(i, j)->bHighlight = false;
 							}
 							else {
 								SetConsoleTextAttribute(hConsole, 12);
@@ -390,7 +387,7 @@ void Board::DisplayBoard()
 						else {
 							if (GetTile(i, j)->bHighlight) {
 								SetConsoleTextAttribute(hConsole, 14);
-								GetTile(i, j)->bHighlight = false;
+								//GetTile(i, j)->bHighlight = false;
 							}
 							else {
 								SetConsoleTextAttribute(hConsole, 12);
@@ -405,7 +402,7 @@ void Board::DisplayBoard()
 				else {
 					if(GetTile(i, j)->bHighlight) {
 						SetConsoleTextAttribute(hConsole, 14);
-						GetTile(i, j)->bHighlight = false;
+						//GetTile(i, j)->bHighlight = false;
 					}
 					else {
 						SetConsoleTextAttribute(hConsole, 7);
@@ -426,8 +423,26 @@ void Board::DisplayBoard()
 	}
 
 	cout << endl << " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl << endl;
+	if (fenHistory->back().at(0) == 'W') {
+		SetConsoleTextAttribute(hConsole, 9);
+	}
+	else {
+		SetConsoleTextAttribute(hConsole, 12);
+	}
 	cout << "FEN: " << fenHistory->back() << endl;
+	SetConsoleTextAttribute(hConsole, 7);
 	cout << endl << " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl << endl;
+}
+
+void Board::ClearHighlightedTile()
+{
+	for (int i = 0; i < 10; i++) {
+		for (int j = 0; j < 10; j++) {
+			if (GetTile(i, j)->bHighlight == true) {
+				GetTile(i, j)->bHighlight = false;
+			}
+		}
+	}
 }
 
 bool Board::ValidPosition(const PositionStruct& PositionToCheck)

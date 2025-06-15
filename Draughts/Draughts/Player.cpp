@@ -27,19 +27,16 @@ void Player::InitialiseMen()
 
 bool Player::HaveLegalMoveLeft()
 {
-	for (Men* men : remainingMen) {
+	bool legalMoveLeft = false;
+
+	for (Men* men : GetAllMenAndKing()) {
 		if (!(men->CanMove().empty())) {
-			return true;
+			legalMoveLeft = true;
+			break;
 		}
 	}
 
-	for (Men* men : remainingKing) {
-		if (!(men->CanMove().empty())) {
-			return true;
-		}
-	}
-
-	return false;
+	return legalMoveLeft;
 }
 
 bool Player::StillHaveMen()
@@ -49,6 +46,19 @@ bool Player::StillHaveMen()
 	}
 
 	return true;
+}
+
+vector<PositionStruct> Player::GetMenWhoCanMove()
+{
+	vector<PositionStruct> output;
+
+	for (Men* men : GetAllMenAndKing()) {
+		if (!(men->CanMove().empty())) {
+			output.push_back(men->GetPosition());
+		}
+	}
+
+	return output;
 }
 
 vector<vector<PositionStruct>>* Player::GetHungriestMen(vector<Men*> hungryMen)
@@ -94,15 +104,8 @@ vector<Men*> Player::GetAllMenWhoCanEat()
 {
 	vector<Men*> outputMen;
 
-	for (Men* men : remainingMen) {
+	for (Men* men : GetAllMenAndKing()) {
 		
-		if (!(men->CanEat().empty())) {
-			outputMen.push_back(men);
-		}
-	}
-
-	for (Men* men : remainingKing) {
-
 		if (!(men->CanEat().empty())) {
 			outputMen.push_back(men);
 		}
@@ -111,14 +114,19 @@ vector<Men*> Player::GetAllMenWhoCanEat()
 	return outputMen;
 }
 
-void Player::RemoveMen()
+void Player::UpdateMen()
 {
 	vector<Men*> menAlive;
 	vector<Men*> kingAlive;
 
 	for (Men* men : remainingMen) {
 		if (men->GetAlive()) {
-			menAlive.push_back(men);
+			if (men->GetKing()) {
+				kingAlive.push_back(men);
+			}
+			else {
+				menAlive.push_back(men);
+			}
 		}
 		else {
 			Board::GetBoardSingleton()->GetTile(men->GetPosition())->men = nullptr;
@@ -138,12 +146,12 @@ void Player::RemoveMen()
 		}
 	}
 
-	this->remainingKing = kingAlive;
+	remainingKing = kingAlive;
 }
 
 bool Player::OneKingLeft()
 {
-	if (remainingKing.size() == 1 && GetAllMenAndKing().size() == 1) {
+	if (remainingKing.size() == GetAllMenAndKing().size() == 1) {
 		return true;
 	}
 

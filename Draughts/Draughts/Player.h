@@ -21,9 +21,10 @@ public:
 	void InitialiseMen();
 	bool HaveLegalMoveLeft();
 	bool StillHaveMen();
+	vector<PositionStruct> GetMenWhoCanMove();
 	vector<vector<PositionStruct>>* GetHungriestMen(vector<Men*> hungryMen);
 	vector<Men*> GetAllMenWhoCanEat();
-	void RemoveMen();
+	void UpdateMen();
 	bool OneKingLeft();
 	bool HasAtLeastOneKing();
 

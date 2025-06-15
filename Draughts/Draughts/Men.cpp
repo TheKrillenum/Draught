@@ -44,65 +44,6 @@ void Men::AppendPositionVector(vector<PositionStruct>* mainVector, vector<Positi
 vector<PositionStruct> Men::CanEat()
 {
 	vector<PositionStruct> eatingPosition;
-	/*
-	* 
-	* DEPRECATED
-	* 
-	PositionStruct emptyPosition;
-	PositionStruct positionToEat;
-
-	for (int i = -1; i < 2; i += 2) {
-		for (int j = -1; j < 2; j += 2) {
-
-			bool bAvailableTiles = true;
-			int increment = 1;
-
-			while (bAvailableTiles) {
-
-				positionToEat = PositionStruct{ position.row + (i * increment), position.column + (j * increment) };
-				emptyPosition = PositionStruct{ position.row + (i * (increment + 1)), position.column + (j * (increment + 1)) };
-
-				if (Board::GetBoardSingleton()->ValidPosition(emptyPosition)) {
-
-					if (Board::GetBoardSingleton()->GetTile(positionToEat)->men != nullptr &&
-						Board::GetBoardSingleton()->GetTile(positionToEat)->men->GetAlive() == true &&
-						Board::GetBoardSingleton()->GetTile(positionToEat)->men->GetWhite() != bWhite) {
-
-						if (Board::GetBoardSingleton()->GetTile(emptyPosition)->men == nullptr) {
-
-							// Can be eaten, add it
-							eatingPosition.push_back(PositionStruct{ position.row + (i * (increment + 1)), position.column + (j * (increment + 1)) });
-							bAvailableTiles = false;
-						}
-						else {
-
-							// Cannot be eaten and block us, stop checking
-							bAvailableTiles = false;
-
-						}
-
-					}
-					else if (Board::GetBoardSingleton()->GetTile(positionToEat)->men == nullptr) {
-						//Keep checking
-						bAvailableTiles = true;
-						increment++;
-					}
-					else {
-						// Ally block us, or isn't alive and still block us
-						bAvailableTiles = false;
-					}
-				}
-				else {
-					bAvailableTiles = false;
-				}
-
-				if (!bKing) {
-					break;
-				}
-
-			}
-		}
-	}*/
 
 	AppendPositionVector(&eatingPosition, CheckDirection(TopRight, position, bWhite, bKing, true));
 	AppendPositionVector(&eatingPosition, CheckDirection(TopLeft, position, bWhite, bKing, true));
@@ -206,10 +147,9 @@ void Men::LongestEatingRoute(vector<vector<PositionStruct>>* eatingPath, vector<
 vector<PositionStruct> Men::CheckDirection(Direction dir, PositionStruct currentPosition, bool white, bool king, bool eat)
 {
 	vector<PositionStruct> output;
-	int forward, sideways, increment;
+	int forward, sideways, increment = 1;
 	bool bTileAvailable = true;
 	PositionStruct tileToCheck;
-	increment = 1;
 
 	switch (dir) {
 	case 0:
@@ -256,6 +196,12 @@ vector<PositionStruct> Men::CheckDirection(Direction dir, PositionStruct current
 
 					output.push_back(PositionStruct{ tileToCheck.row + forward, tileToCheck.column + sideways });
 			}
+			else {
+				bTileAvailable = false;
+			}
+		}
+		else {
+			bTileAvailable = false;
 		}
 
 		if (!king) {

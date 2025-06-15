@@ -45,7 +45,5 @@ public:
 
 	void removeWhiteSpace(string& inputLine);
 	bool getValidPlayerInput(PositionStruct& position);
-
-	void Test(vector<vector<PositionStruct>>* pinus, vector<PositionStruct> pi2);
 };
 

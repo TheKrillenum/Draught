@@ -10,6 +10,7 @@ class Board
 {
 private:
 
+	// Singelton
 	Board();
 	static Board* singleton;
 
@@ -18,20 +19,15 @@ private:
 	int turnCounter;
 	int kingMovesCounter;
 
-	HANDLE hConsole; // visual part
+	// For visuals
+	HANDLE hConsole; 
 
 public:
 
-	//Getter and Setters
+	//Singelton
 	Board(const Board&) = delete;
 	Board& operator=(const Board&) = delete;
 	static Board* GetBoardSingleton();
-
-	int GetTurnCounter();
-	int GetKingMoveCounter();
-	vector<string>* GetFenHistory();
-	struct TileStruct* GetTile(int row, int column);
-	struct TileStruct* GetTile(const struct PositionStruct& position);
 
 	// Board logic
 	string LoadBoard(string FEN);
@@ -42,6 +38,14 @@ public:
 	string GetMenLayout();
 	string GetAndUpdateAmountOfTurn(bool blackPlayerTurn);
 	void DisplayBoard();
+	void ClearHighlightedTile();
 	bool ValidPosition(const PositionStruct& PositionToCheck);
+
+	// Getters and Setters
+	int GetTurnCounter();
+	int GetKingMoveCounter();
+	vector<string>* GetFenHistory();
+	struct TileStruct* GetTile(int row, int column);
+	struct TileStruct* GetTile(const struct PositionStruct& position);
 };
 

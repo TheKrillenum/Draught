@@ -25,10 +25,6 @@ private:
 public:
 	
 	Men(bool white, PositionStruct initPosition, bool king);
-	bool GetWhite();
-	bool GetKing();
-	bool GetAlive();
-	void SetAlive(bool isAlive);
 	void TransformToKing();
 	void AppendPositionVector(vector<PositionStruct>* mainVector, vector<PositionStruct> insertVector);
 	vector<PositionStruct> CanEat();
@@ -36,6 +32,12 @@ public:
 	void LongestEatingRoute(vector<vector<PositionStruct>>* eatingPath, vector<PositionStruct> currentPath, PositionStruct currentPosition);
 	vector<PositionStruct> CheckDirection(Direction dir, PositionStruct currentPosition, bool white, bool king, bool eat);
 
-	PositionStruct GetPosition();
+	// Getters and Setters
+
+	bool GetWhite();
+	bool GetKing();
+	bool GetAlive();
 	void SetPosition(PositionStruct newPosition);
+	void SetAlive(bool isAlive);
+	PositionStruct GetPosition();
 };

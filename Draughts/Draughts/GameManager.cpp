@@ -70,7 +70,7 @@ void GameManager::PlayGame()
 	{
 		PlayTurn();
 
-		string startingPlayer = (currentPlayer->GetbWhite()) ? "W" : "B";
+		string startingPlayer = (currentPlayer->GetbWhite()) ? "B" : "W";
 		Board::GetBoardSingleton()->UpdateFEN(startingPlayer);
 
 		if (CheckGameIsWon()) {
@@ -108,13 +108,16 @@ void GameManager::PlayTurn()
 			menToChooseFrom.push_back(individualPath.front());
 		}
 	}
+	else {
+		menToChooseFrom = currentPlayer->GetMenWhoCanMove();
+	}
 
 	PositionStruct chosenMen;
 	PositionStruct chosenDestination;
 	vector<PositionStruct> destinationToChooseFrom;
-	bool confirmChosenMen = true;
+	bool confirmChosenMen = false;
 
-	while (confirmChosenMen) {
+	while (!confirmChosenMen) {
 
 		chosenMen = PlayerReturnChosenMen(menToChooseFrom);
 
@@ -129,10 +132,10 @@ void GameManager::PlayTurn()
 		chosenDestination = PlayerReturnChosenDestination(chosenMen, destinationToChooseFrom);
 
 		if (chosenDestination == PositionStruct{ -1 , -1 }) {
-			confirmChosenMen = true;
+			confirmChosenMen = false;
 		}
 		else {
-			confirmChosenMen = false;
+			confirmChosenMen = true;
 		}
 	}
 
@@ -146,9 +149,9 @@ void GameManager::PlayTurn()
 		break;
 	}
 
-	chosenMen = chosenDestination;
-
 	if (pathAvailable) {
+
+		chosenMen = chosenDestination;
 
 		while (!longestEatingPaths->empty() && longestEatingPaths->front().size() > 2) {
 
@@ -182,23 +185,22 @@ void GameManager::PlayTurn()
 				Board::GetBoardSingleton()->MoveMen(chosenMen, chosenDestination, true);
 				break;
 			}
-
-			chosenMen = chosenDestination;
-
 		}
 	}
 
-	Player* oppositePlayer = (currentPlayer == allPlayers[0]) ? allPlayers[1] : allPlayers[0];
-
-	oppositePlayer->RemoveMen();
-
 	Board::GetBoardSingleton()->CheckMenBecomeKing(chosenDestination);
+
+	for (Player* players : allPlayers) {
+		players->UpdateMen();
+	}
+
 }
 
 PositionStruct GameManager::PlayerReturnChosenMen(const vector<PositionStruct>& menToChoose)
 {
 	PositionStruct chosenMen;
 	bool validChoice = false;
+	bool validInput;
 
 	while (!validChoice) {
 
@@ -208,12 +210,19 @@ PositionStruct GameManager::PlayerReturnChosenMen(const vector<PositionStruct>& 
 
 		Board::GetBoardSingleton()->DisplayBoard();
 
-		cout << "Please choose the position of a Men to be moved by entering" << endl;
-		cout << "it's position in the form 'row column', seperate by a white space" << endl;
-		cout << "Example: 4 6" << endl;
+		cout << "Please choose the position of a Men to be moved" << endl;
+		if (!menToChoose.empty()) {
+			cout << "The chosen Men MUST be one of the highlighted men." << endl;
+		}
+		cout << "Type it's position in the form 'row column', seperate by a white space." << endl;
+		cout << "Example: 4 6" << endl << endl;
 		cout << "[ChosenMen'sPosition]>";
 
-		while (getValidPlayerInput(chosenMen));
+		validInput = false;
+		
+		while (!validInput) {
+			validInput = (getValidPlayerInput(chosenMen) && Board::GetBoardSingleton()->ValidPosition(chosenMen));
+		}
 
 		if (!menToChoose.empty()) {
 
@@ -224,26 +233,16 @@ PositionStruct GameManager::PlayerReturnChosenMen(const vector<PositionStruct>& 
 			}
 
 		}
-		else {
-			if (Board::GetBoardSingleton()->ValidPosition(chosenMen) && 
-				(Board::GetBoardSingleton()->GetTile(chosenMen)->men != nullptr) &&
-				(Board::GetBoardSingleton()->GetTile(chosenMen)->men->GetWhite() == currentPlayer->GetbWhite())) {
-				
-				validChoice = true;
-
-			}
-		}
 	}
+
+	Board::GetBoardSingleton()->ClearHighlightedTile();
 
 	return chosenMen;
 }
 
 PositionStruct GameManager::PlayerReturnChosenDestination(PositionStruct chosenMen, vector<PositionStruct> availableDestination)
 {
-
-	if (Board::GetBoardSingleton()->GetTile(chosenMen)->men == nullptr) {
-		return PositionStruct{ -1 , -1 };
-	}
+	bool validInput;
 
 	if (availableDestination.empty()) {
 		availableDestination = Board::GetBoardSingleton()->GetTile(chosenMen)->men->CanMove();
@@ -260,11 +259,23 @@ PositionStruct GameManager::PlayerReturnChosenDestination(PositionStruct chosenM
 
 		Board::GetBoardSingleton()->DisplayBoard();
 
-		cout << "Please choose a destination, in the form of 'row column', seperate by a white space" << endl;
-		cout << "Exemple: 5 9" << endl;
+		cout << "Please choose a destination.";
+		if (!availableDestination.empty()) {
+			cout << "The chosen destination MUST be one of the highlighted tiles." << endl;
+		}
+		cout << "Type it's position in the form of 'row column', seperate by a white space" << endl;
+		cout << "Exemple: 5 9" << endl << endl;
 		cout << "[DestinationPosition]>";
 
-		while (getValidPlayerInput(chosenDestination));
+		validInput = false;
+
+		while (!validInput) {
+			validInput = getValidPlayerInput(chosenDestination);
+		}
+
+		if (chosenDestination == PositionStruct{ -1 , -1 }) {
+			return chosenDestination;
+		}
 
 		for (PositionStruct pos : availableDestination) {
 			if (chosenDestination == pos) {
@@ -274,6 +285,8 @@ PositionStruct GameManager::PlayerReturnChosenDestination(PositionStruct chosenM
 
 	}
 	
+	Board::GetBoardSingleton()->ClearHighlightedTile();
+
 	return chosenDestination;
 }
 
@@ -463,26 +476,5 @@ bool GameManager::getValidPlayerInput(PositionStruct& position) {
 	bool fail2 = (inputStream >> position.column).fail();
 	bool fail3 = inputStream.peek() != EOF;
 
-	return !fail1 && !fail2 && !fail3 && !Board::GetBoardSingleton()->ValidPosition(position);
-}
-
-void GameManager::Test(vector<vector<PositionStruct>>* pinus, vector<PositionStruct> pi2)
-{
-
-	cout << "Updated longest eaing path" << endl;
-	for (vector<PositionStruct> individualPath : *pinus) {
-		cout << "> ";												// HERE
-		for (PositionStruct pos : individualPath) {					// HERE
-			cout << "(" << pos.row << "," << pos.column << ") ";	// HERE
-		}				//HERE
-		cout << endl << endl;	// HERE
-	}
-
-	cout << "Destination To Choose for player" << endl;
-	for (PositionStruct pos : pi2) {
-		cout << "> (" << pos.row << "," << pos.column << ") ";
-	}
-
-	string x;	// HERE
-	cin >> x;	// HERE
+	return !fail1 && !fail2 && !fail3;// && !Board::GetBoardSingleton()->ValidPosition(position);
 }
